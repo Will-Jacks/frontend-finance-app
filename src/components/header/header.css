@@ -1,0 +1,4 @@
+.header-container {
+    width: calc(100vw - 2px);
+    border: 1px solid black;
+}
