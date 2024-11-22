@@ -1,46 +1,47 @@
 import { useEffect, useState } from "react";
+import { client, topic } from "../../connection";
+
+
 
 const RenderBill = () => {
-
-    const [responseOfFetchApi, setResponseOfFetchApi] = useState(null);
-
-    const url = "http://10.0.0.151:8080/conta/1";
-    const getBill = async (url) => {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
-    }
+    const [message, setMessage] = useState([]);
 
     useEffect(() => {
-        const fetchData = async() => {
-            try{
-                const data = await getBill(url);
-                setResponseOfFetchApi(data);
-            }catch(e) {
-                console.error(e);
-            }
-        }
+        client.subscribe(topic);
+        client.publish(`${topic}-get`, 'fetchUrl'); // Dispara o método GET no backend MQTT
 
-        fetchData();
+        client.on('message', (topic, payload) => {
+            if (topic == "finance-bills-app") {
+                setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
+            }
+            
+        });
     }, []);
 
+
+
+
     return (
-        <>
-            <h1>Testando componente</h1>
-            {
-                responseOfFetchApi ? (
-                    <>
-                    <p>Título: {responseOfFetchApi.titulo}</p>
-                    <p>Banco: {responseOfFetchApi.banco}</p>
-                    <p>Categoria: {responseOfFetchApi.categoria}</p>
-                    <p>Valor: {responseOfFetchApi.valor}</p>
-                    </>
-                )
-                    :
-                    <p>Objeto não encontrado</p>
-            }
-        </>
+        <div>{
+            message.length > 0 ?
+                message.map((bill, index) => {
+                    return (
+                        <div key={index}>
+                            <h2>{bill.titulo}</h2>
+                            <p>{`R$ ${bill.valor}`}</p>
+                            <p>{bill.descricao}</p>
+                            <p>{bill.estabelecimento}</p>
+                            <p>{bill.formaDePagamento}</p>
+                            <p>{bill.banco}</p>
+                            <p>{bill.comprador}</p>
+                            <p>{bill.categoria}</p>
+                        </div>
+                    )
+                }) :
+                <p>Nada a mostrar</p>
+        }
+        </div>
     )
-}
+};
 
 export default RenderBill;

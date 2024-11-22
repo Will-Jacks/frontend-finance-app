@@ -1,6 +1,25 @@
 import { useState } from "react";
+import { client, topic } from "../../connection";
+
+export class Bill {
+    constructor(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria) {
+
+        this.titulo = titulo;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.estabelecimento = estabelecimento;
+        this.formaDePagamento = formaDePagamento;
+        this.banco = banco;
+        this.comprador = comprador;
+        this.categoria = categoria;
+    }
+}
 
 const BillCreator = () => {
+
+    const sendMessage = (data)=> {
+        client.publish(`${topic}-post`, data);
+    }
 
     const [titulo, setTitulo] = useState("");
     const [valor, setValor] = useState("");
@@ -10,28 +29,14 @@ const BillCreator = () => {
     const [banco, setBanco] = useState("nubank");
     const [comprador, setComprador] = useState("livia");
     const [categoria, setCategoria] = useState("alimentacao");
-
-
-    class Bill {
-        constructor(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria) {
-
-            this.titulo = titulo;
-            this.valor = valor;
-            this.descricao = descricao;
-            this.estabelecimento = estabelecimento;
-            this.formaDePagamento = formaDePagamento;
-            this.banco = banco;
-            this.comprador = comprador;
-            this.categoria = categoria;
-        }
-    }
+    
 
     function onSubmit(e) {
         e.preventDefault();
 
         const bill = new Bill(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria);
-        
-        console.log(bill);
+        const formattedMessage = JSON.stringify(bill);
+        sendMessage(formattedMessage);
     }
 
     return (
@@ -42,11 +47,12 @@ const BillCreator = () => {
                 placeholder="Digite aqui"
                 onChange={(e) => setTitulo(e.target.value)}
                 value={titulo}
+                autoFocus
             />
 
             <label>Valor</label>
             <input
-                type="text"
+                type="number"
                 placeholder="Digite aqui"
                 value={valor}
                 onChange={(e) => { setValor(e.target.value) }}
