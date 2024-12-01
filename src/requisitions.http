@@ -1,1 +1,1 @@
-GET http://10.0.0.151:8080/conta/1
+DELETE  http://10.0.0.151:8080/conta/delete/39

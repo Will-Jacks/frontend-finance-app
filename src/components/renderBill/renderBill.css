@@ -1,0 +1,38 @@
+.wrapper-container-bills-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-bills-card {
+    box-sizing: border-box;
+    border: 0.5px solid black;
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-value-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.estab-form-pag-div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wrapper-categ-trash-icon {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trash-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
