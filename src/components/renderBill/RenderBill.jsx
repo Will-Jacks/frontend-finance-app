@@ -16,12 +16,17 @@ const RenderBill = () => {
             if (topic == "finance-bills-app") {
                 setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
             }
-
         });
     }, []);
 
     return (
-        <div className="wrapper-container-bills-card">{
+        <div className="wrapper-container-bills-card">
+            <div className="wrapper-filters-button">
+                <button onClick={()=> client.publish(`${topic}-filtro-comprador`, 'livia')}>Lívia</button>
+                <button onClick={()=> client.publish(`${topic}-filtro-comprador`, 'william')}>William</button>
+                <button onClick={()=> client.publish(`${topic}-filtro-comprador`, 'miriam')}>Miriam</button>
+            </div>
+            {
             message.length > 0 ?
                 message.map((bill, index) => {
                     return (

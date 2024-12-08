@@ -1,4 +1,3 @@
-import BillCreator from "../billCreator/BillCreator";
 import "./header.css";
 
 const Header = () => {
