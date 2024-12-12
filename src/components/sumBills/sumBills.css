@@ -1,3 +1,19 @@
 .container-total-value-bill {
     margin-left: 10px;
 }
+
+.wrapper-gains-input-value {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.input-earning-value {
+    height: 25px;
+    width: 50%;
+    border: 0.5px solid rgba(0, 0, 0, 0.151);
+    border-radius: 8px;
+    margin-left: 5px;
+    padding: 5px;
+    font-size: 18px;
+}

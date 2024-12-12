@@ -32,6 +32,10 @@
     margin-bottom: 3px;
 }
 
+.bill-value:hover {
+    cursor: pointer;
+}
+
 .estab-form-pag-div {
     display: flex;
     align-items: center;
