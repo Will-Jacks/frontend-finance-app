@@ -50,6 +50,9 @@ const SumBills = () => {
                     />
                 </h3>
             </div>
+            <div>
+                <h3>Restante: ${(totalEarnings - totalValueBill).toFixed(2)}</h3>
+            </div>
         </div>
     )
 }
