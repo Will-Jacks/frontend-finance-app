@@ -37,7 +37,6 @@ const RenderBill = () => {
                                     <p className="bill-value" onClick={() => {
                                         client.publish(`${topic}-isPaid`, isPaid.toString());
                                         setIsPaid(!isPaid);
-                                        console.log('clicou')
                                     }
                                     }
                                     >
@@ -61,7 +60,7 @@ const RenderBill = () => {
                             </div>
                         )
                     }) :
-                    <p>Nada a mostrar</p>
+                    <p className="text-nothing-to-show">Nada a mostrar</p>
             }
         </div>
     )

@@ -39,6 +39,10 @@ const BillCreator = () => {
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
         setIsFormVisible(false);
+        setTitulo("")
+        setValor("")
+        setDescricao("")
+        setEstabelecimento("")
         window.location.reaload();
     }
 

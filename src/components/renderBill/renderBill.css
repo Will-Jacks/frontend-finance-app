@@ -9,6 +9,13 @@
     padding: 3px;
 }
 
+.text-nothing-to-show {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    padding: 20px;
+}
+
 .wrapper-container-bills-card {
     display: flex;
     flex-direction: column;
