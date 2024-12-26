@@ -10,7 +10,6 @@ const SumBills = () => {
 
     useEffect(() => {
         client.subscribe(topic);
-        client.publish(`${topic}-get`, 'fetchUrl'); // Dispara o método GET no backend MQTT
 
         client.on('message', (topic, payload) => {
             if (topic == "finance-bills-app") {

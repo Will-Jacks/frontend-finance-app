@@ -11,7 +11,7 @@ const RenderBill = () => {
 
     useEffect(() => {
         client.subscribe(topic);
-        client.publish(`${topic}-get`, 'fetchUrl'); // Dispara o método GET no backend MQTT
+        client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
         client.on('message', (topic, payload) => {
             if (topic == "finance-bills-app") {
@@ -23,6 +23,7 @@ const RenderBill = () => {
     return (
         <div className="wrapper-container-bills-card">
             <div className="wrapper-filters-button">
+                <button onClick={()=>client.publish(`${topic}-get`, 'fetchUrl' )}>Todos</button>
                 <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'livia')}>Lívia</button>
                 <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'william')}>William</button>
                 <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'miriam')}>Miriam</button>
