@@ -3,7 +3,7 @@ import { client, topic } from "../../connection";
 import "./billCreator.css";
 
 export class Bill {
-    constructor(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria) {
+    constructor(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria, data, hora) {
 
         this.titulo = titulo;
         this.valor = valor;
@@ -13,11 +13,14 @@ export class Bill {
         this.banco = banco;
         this.comprador = comprador;
         this.categoria = categoria;
+        this.data = data;
+        this.hora = hora;
     }
 }
 
 const BillCreator = () => {
     const [isFormVisible, setIsFormVisible] = useState(false);
+
 
     const sendMessage = (data) => {
         client.publish(`${topic}-post`, data);
@@ -35,7 +38,9 @@ const BillCreator = () => {
 
     function onSubmit(e) {
         e.preventDefault();
-        const bill = new Bill(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria);
+        const currentDate = new Date();
+        
+        const bill = new Bill(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
         setIsFormVisible(false);
@@ -43,7 +48,7 @@ const BillCreator = () => {
         setValor("")
         setDescricao("")
         setEstabelecimento("")
-        window.location.reaload();
+        window.location.reload();
     }
 
     return (
@@ -52,7 +57,7 @@ const BillCreator = () => {
                 onClick={() => setIsFormVisible(!isFormVisible)}
                 className="toggle-form-button"
             >
-                {isFormVisible ? "Minimizar" : "Registrar gasto "}
+                {isFormVisible ? "Minimizar" : " Adicionar "}
             </button>
             {
                 isFormVisible && (

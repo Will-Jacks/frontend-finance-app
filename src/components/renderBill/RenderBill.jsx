@@ -3,6 +3,8 @@ import { client, topic } from "../../connection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
+import BillCreator from "../billCreator/BillCreator";
+import BuyerFilter from "../Filters/BuyerFilter";
 
 
 const RenderBill = () => {
@@ -22,12 +24,12 @@ const RenderBill = () => {
 
     return (
         <div className="wrapper-container-bills-card">
-            <div className="wrapper-filters-button">
-                <button onClick={()=>client.publish(`${topic}-get`, 'fetchUrl' )}>Todos</button>
-                <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'livia')}>Lívia</button>
-                <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'william')}>William</button>
-                <button onClick={() => client.publish(`${topic}-filtro-comprador`, 'miriam')}>Miriam</button>
-            </div>
+            <div className="container-filter-buttons">
+                <BuyerFilter />
+                <div className="wrapper-bill-creator">
+                    <BillCreator />
+                </div>      
+            </div> {/* Isso dá pra abstrair em outro componente pra separar a lógica */}
             {
                 message.length > 0 ?
                     message.map((bill, index) => {

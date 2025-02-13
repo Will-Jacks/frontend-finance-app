@@ -1,0 +1,18 @@
+.wrapper-filter-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.wrapper-filter-buttons > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 30px;
+}
+.wrapper-filter-buttons > button:hover {
+    cursor: pointer;
+    background-color: hsla(130, 100%, 59%, 0.226);
+}
