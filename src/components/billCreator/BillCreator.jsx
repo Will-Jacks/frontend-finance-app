@@ -19,9 +19,7 @@ export class Bill {
 }
 
 const BillCreator = () => {
-    const [isFormVisible, setIsFormVisible] = useState(false);
-
-
+    
     const sendMessage = (data) => {
         client.publish(`${topic}-post`, data);
     }
@@ -39,11 +37,11 @@ const BillCreator = () => {
     function onSubmit(e) {
         e.preventDefault();
         const currentDate = new Date();
-        
+
         const bill = new Bill(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
-        setIsFormVisible(false);
+        
         setTitulo("")
         setValor("")
         setDescricao("")
@@ -53,104 +51,98 @@ const BillCreator = () => {
 
     return (
         <div className="main-container-bill-creator">
-            <button
-                onClick={() => setIsFormVisible(!isFormVisible)}
-                className="toggle-form-button"
-            >
-                {isFormVisible ? "Minimizar" : " Adicionar "}
-            </button>
-            {
-                isFormVisible && (
-                    <form onSubmit={onSubmit} className="form-container-bill-creator">
-                        <label>Título</label>
-                        <input
-                            type="text"
-                            placeholder="Digite aqui"
-                            onChange={(e) => setTitulo(e.target.value)}
-                            value={titulo}
-                            autoFocus
-                            required
-                        />
 
-                        <label>Valor</label>
-                        <input
-                            type="number"
-                            placeholder="Digite aqui"
-                            value={valor}
-                            onChange={(e) => { setValor(e.target.value) }}
-                            required
-                        />
 
-                        <label>Descrição</label>
-                        <input
-                            type="text"
-                            placeholder="Digite aqui"
-                            value={descricao}
-                            onChange={(e) => { setDescricao(e.target.value) }}
-                        />
+            <form onSubmit={onSubmit} className="form-container-bill-creator">
+                <label>Título</label>
+                <input
+                    type="text"
+                    placeholder="Digite aqui"
+                    onChange={(e) => setTitulo(e.target.value)}
+                    value={titulo}
+                    autoFocus
+                    required
+                />
 
-                        <label>Estabelecimento</label>
-                        <input
-                            type="text"
-                            placeholder="Digite aqui"
-                            value={estabelecimento}
-                            onChange={(e) => { setEstabelecimento(e.target.value) }}
-                        />
+                <label>Valor</label>
+                <input
+                    type="number"
+                    placeholder="Digite aqui"
+                    value={valor}
+                    onChange={(e) => { setValor(e.target.value) }}
+                    required
+                />
 
-                        <label>Forma de pagamento</label>
-                        <select
-                            name=""
-                            id=""
-                            value={formaDePagamento}
-                            onChange={(e) => { setFormaDePagamento(e.target.value) }}>
-                            <option value="Crédito">Crédito</option>
-                            <option value="Débito">Débito</option>
-                            <option value="Pix">Pix</option>
-                            <option value="Dinheiro">Dinheiro</option>
-                        </select>
+                <label>Descrição</label>
+                <input
+                    type="text"
+                    placeholder="Digite aqui"
+                    value={descricao}
+                    onChange={(e) => { setDescricao(e.target.value) }}
+                />
 
-                        <label>Banco</label>
-                        <select
-                            name=""
-                            id=""
-                            value={banco}
-                            onChange={(e) => { setBanco(e.target.value) }}>
-                            <option value="Nubank">Nubank</option>
-                            <option value="Santander">Santander</option>
-                            <option value="C6">C6</option>
-                            <option value="Will Bank">Will Bank</option>
-                        </select>
+                <label>Estabelecimento</label>
+                <input
+                    type="text"
+                    placeholder="Digite aqui"
+                    value={estabelecimento}
+                    onChange={(e) => { setEstabelecimento(e.target.value) }}
+                />
 
-                        <label htmlFor="">Comprador</label>
-                        <select
-                            name=""
-                            id=""
-                            value={comprador}
-                            onChange={(e) => { setComprador(e.target.value) }}>
-                            <option value="Lívia">Lívia</option>
-                            <option value="William">William</option>
-                            <option value="Miriam">Miriam</option>
-                        </select>
+                <label>Forma de pagamento</label>
+                <select
+                    name=""
+                    id=""
+                    value={formaDePagamento}
+                    onChange={(e) => { setFormaDePagamento(e.target.value) }}>
+                    <option value="Crédito">Crédito</option>
+                    <option value="Débito">Débito</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
 
-                        <label htmlFor="">Categoria</label>
-                        <select
-                            name=""
-                            id=""
-                            value={categoria}
-                            onChange={(e) => { setCategoria(e.target.value) }}>
-                            <option value="Alimentação">Alimentação</option>
-                            <option value="Gasolina">Gasolina</option>
-                            <option value="Cosméticos">Cosméticos</option>
-                            <option value="Contas Fixas">Contas fixas</option>
-                            <option value="Roupas">Roupas</option>
-                            <option value="Assinaturas">Assinaturas</option>
-                            <option value="Outros">Outros</option>
-                        </select>
+                <label>Banco</label>
+                <select
+                    name=""
+                    id=""
+                    value={banco}
+                    onChange={(e) => { setBanco(e.target.value) }}>
+                    <option value="Nubank">Nubank</option>
+                    <option value="Santander">Santander</option>
+                    <option value="C6">C6</option>
+                    <option value="Will Bank">Will Bank</option>
+                </select>
 
-                        <button type="submit">Criar</button>
-                    </form>
-                )
-            }
+                <label htmlFor="">Comprador</label>
+                <select
+                    name=""
+                    id=""
+                    value={comprador}
+                    onChange={(e) => { setComprador(e.target.value) }}>
+                    <option value="Lívia">Lívia</option>
+                    <option value="William">William</option>
+                    <option value="Miriam">Miriam</option>
+                </select>
+
+                <label htmlFor="">Categoria</label>
+                <select
+                    name=""
+                    id=""
+                    value={categoria}
+                    onChange={(e) => { setCategoria(e.target.value) }}>
+                    <option value="Alimentação">Alimentação</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Cosméticos">Cosméticos</option>
+                    <option value="Contas Fixas">Contas fixas</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Assinaturas">Assinaturas</option>
+                    <option value="Outros">Outros</option>
+                </select>
+
+                <button type="submit">Criar</button>
+            </form>
+
+
 
         </div>
     )

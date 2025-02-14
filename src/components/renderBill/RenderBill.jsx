@@ -6,10 +6,24 @@ import './renderBill.css';
 import BillCreator from "../billCreator/BillCreator";
 import BuyerFilter from "../Filters/BuyerFilter";
 
+import Modal from 'react-modal';
+
 
 const RenderBill = () => {
     const [message, setMessage] = useState([]);
     const [isPaid, setIsPaid] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    function openModal() {
+        setIsModalOpen(true);
+    }
+
+    function closeModal() {
+        setIsModalOpen(false);
+    }
+
+
 
     useEffect(() => {
         client.subscribe(topic);
@@ -26,9 +40,21 @@ const RenderBill = () => {
         <div className="wrapper-container-bills-card">
             <div className="container-filter-buttons">
                 <BuyerFilter />
-                <div className="wrapper-bill-creator">
+
+                <div>
+                    <button onClick={openModal}>Adicionar</button>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={closeModal}
+                        contentLabel="Adicione uma nova conta"
+                    >
+                    <button onClick={closeModal}>X</button>
                     <BillCreator />
-                </div>      
+
+                    </Modal>
+                </div>
+                <div className="wrapper-bill-creator">
+                </div>
             </div> {/* Isso dá pra abstrair em outro componente pra separar a lógica */}
             {
                 message.length > 0 ?

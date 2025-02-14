@@ -1,1 +1,7 @@
-GET  http://10.0.0.151:8080/conta/parcial-bills
+PUT  http://192.168.0.33:8080/conta/setIsPaid/102
+Content-Type: application/json
+Authorization: Bearer ACCES-TOKEN
+
+{
+    isPaid: true
+}
