@@ -16,7 +16,7 @@ export class Bill {
 }
 
 const BillCreator = () => {
-    
+
     const sendMessage = (data) => {
         client.publish(`${topic}-post`, data);
     }
@@ -28,17 +28,27 @@ const BillCreator = () => {
     const [categoria, setCategoria] = useState("Alimentação");
 
 
+    function capitalizeFirstLetter(title) {
+        let capitalizedString = title[0].toUpperCase();
+        for (let i = 1; i < title.length; i++) {
+            capitalizedString += title[i];
+        }
+
+        return capitalizedString;
+    }
+
     function onSubmit(e) {
         e.preventDefault();
-        const currentDate = new Date();
+        const currentDate = new Date(); // Captura a data atual do sistema quando
 
-        const bill = new Bill(titulo, valor, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
+
+
+        const bill = new Bill(capitalizeFirstLetter(titulo), valor, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
-        
+
         setTitulo("")
         setValor("")
-        setDescricao("")
         window.location.reload();
     }
 
