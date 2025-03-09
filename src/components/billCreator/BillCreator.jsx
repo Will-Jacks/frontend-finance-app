@@ -3,13 +3,10 @@ import { client, topic } from "../../connection";
 import "./billCreator.css";
 
 export class Bill {
-    constructor(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria, data, hora) {
+    constructor(titulo, valor, banco, comprador, categoria, data, hora) {
 
         this.titulo = titulo;
         this.valor = valor;
-        this.descricao = descricao;
-        this.estabelecimento = estabelecimento;
-        this.formaDePagamento = formaDePagamento;
         this.banco = banco;
         this.comprador = comprador;
         this.categoria = categoria;
@@ -26,9 +23,6 @@ const BillCreator = () => {
 
     const [titulo, setTitulo] = useState("");
     const [valor, setValor] = useState("");
-    const [descricao, setDescricao] = useState("");
-    const [estabelecimento, setEstabelecimento] = useState("");
-    const [formaDePagamento, setFormaDePagamento] = useState("Crédito");
     const [banco, setBanco] = useState("Nubank");
     const [comprador, setComprador] = useState("Lívia");
     const [categoria, setCategoria] = useState("Alimentação");
@@ -38,14 +32,13 @@ const BillCreator = () => {
         e.preventDefault();
         const currentDate = new Date();
 
-        const bill = new Bill(titulo, valor, descricao, estabelecimento, formaDePagamento, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
+        const bill = new Bill(titulo, valor, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
         
         setTitulo("")
         setValor("")
         setDescricao("")
-        setEstabelecimento("")
         window.location.reload();
     }
 
@@ -72,34 +65,6 @@ const BillCreator = () => {
                     onChange={(e) => { setValor(e.target.value) }}
                     required
                 />
-
-                <label>Descrição</label>
-                <input
-                    type="text"
-                    placeholder="Digite aqui"
-                    value={descricao}
-                    onChange={(e) => { setDescricao(e.target.value) }}
-                />
-
-                <label>Estabelecimento</label>
-                <input
-                    type="text"
-                    placeholder="Digite aqui"
-                    value={estabelecimento}
-                    onChange={(e) => { setEstabelecimento(e.target.value) }}
-                />
-
-                <label>Forma de pagamento</label>
-                <select
-                    name=""
-                    id=""
-                    value={formaDePagamento}
-                    onChange={(e) => { setFormaDePagamento(e.target.value) }}>
-                    <option value="Crédito">Crédito</option>
-                    <option value="Débito">Débito</option>
-                    <option value="Pix">Pix</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                </select>
 
                 <label>Banco</label>
                 <select

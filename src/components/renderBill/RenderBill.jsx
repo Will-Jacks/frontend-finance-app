@@ -11,8 +11,6 @@ import Modal from 'react-modal';
 
 const RenderBill = () => {
     const [message, setMessage] = useState([]);
-    const [isPaid, setIsPaid] = useState(false);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     function openModal() {
@@ -48,8 +46,8 @@ const RenderBill = () => {
                         onRequestClose={closeModal}
                         contentLabel="Adicione uma nova conta"
                     >
-                    <button onClick={closeModal}>X</button>
-                    <BillCreator />
+                        <button onClick={closeModal}>X</button>
+                        <BillCreator />
 
                     </Modal>
                 </div>
@@ -63,20 +61,7 @@ const RenderBill = () => {
                             <div key={index} className="container-bills-card">
                                 <div className="title-value-div">
                                     <h2>{bill.titulo}</h2>
-                                    <p className="bill-value" onClick={() => {
-                                        client.publish(`${topic}-isPaid`, isPaid.toString());
-                                        setIsPaid(!isPaid);
-                                    }
-                                    }
-                                    >
-                                        {`R$${bill.valor}`}</p>
-                                </div>
-
-                                <p>{bill.descricao}</p>
-                                <p>{bill.estabelecimento}</p>
-                                <div className="estab-form-pag-div">
-                                    <p>{bill.formaDePagamento}</p>
-                                    <p>{bill.banco}</p>
+                                    <p className="bill-value">{`R$${bill.valor}`}</p>
                                 </div>
                                 <p>{bill.comprador}</p>
                                 <div className="wrapper-categ-trash-icon">
