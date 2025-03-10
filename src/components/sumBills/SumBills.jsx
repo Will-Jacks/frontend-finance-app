@@ -24,7 +24,7 @@ const SumBills = () => {
 
     return (
         <div className='container-total-value-bill'>
-            <h2>Gastos: R$ {totalValueBill.toFixed(2)}</h2>
+            <h2>Total: R$ {totalValueBill.toFixed(2)}</h2>
             <div className="wrapper-gains-input-value">
             </div>
         </div>

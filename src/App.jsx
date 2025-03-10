@@ -6,10 +6,13 @@ import SumBills from './components/sumBills/SumBills'
 function App() {
 
   return (
-    <>    
+    <>
       <Header />
-      <SumBills />
       <RenderBill />
+      {/* Faltando implementar o createBill e o Total */}
+      {/* Estou querendo implementar numa barra fixa embaixo da aplicação,
+      só vou procurar a melhor maneira de fazer isso
+       */}
     </>
   )
 }

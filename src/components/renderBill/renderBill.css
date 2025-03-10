@@ -20,11 +20,10 @@
 
 .container-bills-card {
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.199);
+    border-bottom: 1px solid rgb(44, 44, 44);
     padding: 8px;
     margin: 5px 0px 10px;
-    border-radius: 8px;
-    background-color: #fff;
+    
     display: flex;
     flex-direction: column;
 }
