@@ -3,24 +3,12 @@ import { client, topic } from "../../connection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
-import BillCreator from "../billCreator/BillCreator";
 import BuyerFilter from "../Filters/BuyerFilter";
-
-import Modal from 'react-modal';
-import SumBills from "../sumBills/SumBills";
-
+import { message } from "../../assets/infoHardCoded";
 
 const RenderBill = () => {
-    const [message, setMessage] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    function openModal() {
-        setIsModalOpen(true);
-    }
-
-    function closeModal() {
-        setIsModalOpen(false);
-    }
+    /* const [message, setMessage] = useState([]); */
+    
 
     function dateFormatter(date) {
         const month = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
@@ -43,7 +31,7 @@ const RenderBill = () => {
 
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         client.subscribe(topic);
         client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
@@ -52,7 +40,7 @@ const RenderBill = () => {
                 setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
             }
         });
-    }, []);
+    }, []); */
 
     return (
         <div className="wrapper-container-bills-card">

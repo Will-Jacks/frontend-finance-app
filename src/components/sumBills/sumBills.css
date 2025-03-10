@@ -1,15 +1,7 @@
-.wrapper-gains-input-value {
+.wrapper-totalValue {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-}
-
-.input-earning-value {
-    height: 25px;
-    width: 50%;
-    border: 0.5px solid rgba(0, 0, 0, 0.151);
-    border-radius: 8px;
-    margin-left: 5px;
-    padding: 5px;
-    font-size: 18px;
+    border: 1px solid white;
+    padding: 10px;
 }

@@ -1,7 +1,10 @@
 import './sumBills.css';
 import { client, topic } from "../../connection";
 import { useEffect, useState } from 'react';
-const SumBills = () => {
+
+
+
+function SumBills() {
 
     //Faz o fetch no backend e retorna todas as bills
     const [message, setMessage] = useState([]);
@@ -23,12 +26,12 @@ const SumBills = () => {
     }, [message]); // Captura o JSON e soma todos os valores
 
     return (
-        <div className='container-total-value-bill'>
+        <div className='wrapper-totalValue'>
             <h2>Total: R$ {totalValueBill.toFixed(2)}</h2>
-            <div className="wrapper-gains-input-value">
-            </div>
+            
         </div>
     )
 }
 
 export default SumBills;
+

@@ -1,6 +1,6 @@
-import Header from './components/header/Header'
-import RenderBill from './components/renderBill/RenderBill'
-import SumBills from './components/sumBills/SumBills'
+import BottomComponent from './components/BottomComponent/BottomComponent';
+import Header from './components/header/Header';
+import RenderBill from './components/renderBill/RenderBill';
 
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     <>
       <Header />
       <RenderBill />
+      <BottomComponent />
     </>
   )
 }
