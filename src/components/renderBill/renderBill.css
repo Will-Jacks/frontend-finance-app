@@ -35,13 +35,23 @@
     margin-bottom: 3px;
 }
 
+.bill-title{
+    font-size: 20px;
+    color: white;
+}
+
 .buyer {
     margin-bottom: 5px;
+    color: rgb(175, 175, 175);
 }
 
 .wrapper-billValue-trashIcon {
     display: flex;
     justify-content: space-between;
+}
+
+.bill-value {
+    color: rgb(175, 175, 175);
 }
 
 .wrapper-categ-trash-icon {

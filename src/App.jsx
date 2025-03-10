@@ -9,10 +9,6 @@ function App() {
     <>
       <Header />
       <RenderBill />
-      {/* Faltando implementar o createBill e o Total */}
-      {/* Estou querendo implementar numa barra fixa embaixo da aplicação,
-      só vou procurar a melhor maneira de fazer isso
-       */}
     </>
   )
 }

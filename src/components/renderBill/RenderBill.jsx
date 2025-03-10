@@ -70,7 +70,7 @@ const RenderBill = () => {
 
                                 <div className="title-date-div">
 
-                                    <h2>{bill.titulo}</h2>
+                                    <h2 className="bill-title">{bill.titulo}</h2>
 
                                     <p>{dateFormatter(bill.data)}</p>
 
@@ -80,7 +80,7 @@ const RenderBill = () => {
 
                                 <div className="wrapper-billValue-trashIcon">
 
-                                    <p className="bill-value">{`R$${bill.valor}`}</p>
+                                    <p className="bill-value">{`R$ ${bill.valor.toFixed(2)}`}</p>
 
                                     <div className="wrapper-categ-trash-icon">
                                         <FontAwesomeIcon
