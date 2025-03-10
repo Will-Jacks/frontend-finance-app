@@ -78,11 +78,12 @@ const RenderBill = () => {
 
                                 <p className="buyer">{bill.comprador}</p>
 
-                                <div className="wrapper-billValue-trashIcon">
+                                <p className="bill-value">{`R$ ${bill.valor.toFixed(2)}`}</p>
 
-                                    <p className="bill-value">{`R$ ${bill.valor.toFixed(2)}`}</p>
+                                <div className="wrapper-billCategory-trashIcon">
 
-                                    <div className="wrapper-categ-trash-icon">
+                                    <p className="bill-category">{bill.categoria}</p>
+                                    <div className="wrapper-trash-icon">
                                         <FontAwesomeIcon
                                             icon={faTrash}
                                             className="trash-icon"

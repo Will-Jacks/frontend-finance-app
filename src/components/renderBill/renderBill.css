@@ -45,7 +45,7 @@
     color: rgb(175, 175, 175);
 }
 
-.wrapper-billValue-trashIcon {
+.wrapper-billCategory-trashIcon {
     display: flex;
     justify-content: space-between;
 }
@@ -54,7 +54,13 @@
     color: rgb(175, 175, 175);
 }
 
-.wrapper-categ-trash-icon {
+.bill-category{
+    margin-top: 5px;
+    color: rgb(175, 175, 175);
+    font-size: 12px;
+}
+
+.wrapper-trash-icon {
     display: flex;
     justify-content: space-between;
 }
