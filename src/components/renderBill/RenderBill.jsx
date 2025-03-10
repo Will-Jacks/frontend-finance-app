@@ -79,7 +79,7 @@ const RenderBill = () => {
                         return (
                             <div key={index} className="container-bills-card">
 
-                                <div className="title-value-div">
+                                <div className="title-date-div">
 
                                     <h2>{bill.titulo}</h2>
 
@@ -87,7 +87,7 @@ const RenderBill = () => {
 
                                 </div>
 
-                                <p>{bill.comprador}</p>
+                                <p className="buyer">{bill.comprador}</p>
 
                                 <div className="wrapper-billValue-trashIcon">
 

@@ -29,21 +29,20 @@
     flex-direction: column;
 }
 
-.title-value-div {
+.title-date-div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3px;
 }
 
-.bill-value:hover {
-    cursor: pointer;
+.buyer {
+    margin-bottom: 5px;
 }
 
-.estab-form-pag-div {
+.wrapper-billValue-trashIcon {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    justify-content: space-between;
 }
 
 .wrapper-categ-trash-icon {
