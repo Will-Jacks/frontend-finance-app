@@ -30,6 +30,7 @@
 
 .title-date-div {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3px;
@@ -38,6 +39,9 @@
 .bill-title{
     font-size: 20px;
     color: white;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .buyer {
