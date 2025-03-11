@@ -20,7 +20,7 @@ function BottomComponent() {
     }
 
     return (
-        <div>
+        <div className="main-container-bottom-component">
             <SumBills />
             <div>
 

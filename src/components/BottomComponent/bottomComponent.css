@@ -1,9 +1,25 @@
+.main-container-bottom-component{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 98%;
+    background-color: #111213;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    
+    border: 1px solid rgb(44, 44, 44);
+    border-radius: 3px;
+
+}
 
 .button-add-bill {
-    width: 50px;
-    height: 50px; 
+    width: 30px;
+    height: 30px; 
     border: none;
-    font-size: 25px;
+    font-size: 15px;
     border-radius: 50%;
     padding: 0;
     background-color: #007bff;
@@ -20,4 +36,11 @@
 .button-add-bill:hover {
     background-color: #0056b3;
     transform: scale(1.1);
+}
+
+@media (min-width: 767px) {
+    .main-container-bottom-component {
+        width: 99%;
+        
+    }
 }
