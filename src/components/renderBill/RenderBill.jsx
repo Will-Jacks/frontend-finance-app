@@ -59,7 +59,10 @@ const RenderBill = () => {
 
                                     <h2 className="bill-title">{bill.titulo}</h2>
 
-                                    <p>{dateFormatter(bill.data)}</p>
+                                    <div className="wrapper-billData-billBanco">
+                                        <p>{dateFormatter(bill.data)}</p>
+                                        <div className={`bank-title ${bill.banco.toLowerCase().replace(" ", "-")}`}></div>
+                                    </div>
 
                                 </div>
 

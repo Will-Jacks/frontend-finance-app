@@ -37,11 +37,47 @@
 }
 
 .bill-title{
+    display: flex;
     font-size: 20px;
     color: white;
     max-width: 70%;
     text-overflow: ellipsis;
     overflow: hidden;
+    align-self: flex-start;
+}
+
+.wrapper-billData-billBanco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bank-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    
+    margin-top: 4px;
+    font-size: 12px;
+    width: 50px;
+    height: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.bank-title.nubank {
+    background-color: purple;
+    color: white
+}
+
+.bank-title.santander {
+    background-color: rgb(255, 0, 0);
+    
+    color: rgb(128, 0, 0);
 }
 
 .buyer {

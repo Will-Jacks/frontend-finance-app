@@ -3,7 +3,6 @@ import { client, topic } from "../../connection";
 import { useEffect, useState } from 'react';
 
 
-
 function SumBills() {
 
     //Faz o fetch no backend e retorna todas as bills
@@ -28,7 +27,7 @@ function SumBills() {
     return (
         <div className='wrapper-totalValue'>
             <h2>Total: R$ {totalValueBill.toFixed(2)}</h2>
-            
+
         </div>
     )
 }

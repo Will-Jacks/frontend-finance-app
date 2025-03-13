@@ -41,7 +41,7 @@ const BillCreator = () => {
         e.preventDefault();
         const currentDate = new Date(); // Captura a data atual do sistema quando
 
-
+        
 
         const bill = new Bill(capitalizeFirstLetter(titulo), valor, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
