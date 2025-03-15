@@ -39,9 +39,32 @@
 }
 
 .create-bill-modal {
-    max-height: 80vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     overflow-y: auto;
+    border: none;
+    border-radius: 12px;
 }
+
+.close-modal-button {
+    background-color: #111213;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+
+    transition: 0.2s;
+}
+.close-modal-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+
 
 @media (min-width: 767px) {
     .main-container-bottom-component {

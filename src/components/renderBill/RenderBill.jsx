@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { client, topic } from "../../connection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";

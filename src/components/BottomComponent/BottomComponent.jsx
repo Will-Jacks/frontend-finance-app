@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import BillCreator from "../billCreator/BillCreator";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
 
@@ -19,17 +19,17 @@ function BottomComponent() {
         setIsModalOpen(false);
     }
 
-    useEffect(()=>{
-        if(isModalOpen) {
+    useEffect(() => {
+        if (isModalOpen) {
             document.body.style.overflow = 'hidden';
-        }else {
+        } else {
             document.body.style.overflow = 'auto'
         }
-        
-        return() => {
+
+        return () => {
             document.body.style.overflow = 'auto'
         }
-    },[isModalOpen])
+    }, [isModalOpen])
 
 
     return (
@@ -50,9 +50,16 @@ function BottomComponent() {
                     appElement={document.querySelector('#root')}
                     className='create-bill-modal'
                 >
-                    
-                    <button onClick={closeModal}>X</button>
-                    <BillCreator />
+
+                    <div className="wrapper-create-bill-modal">
+                        <button
+                            onClick={closeModal}
+                            className="close-modal-button"
+                        >
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                        <BillCreator />
+                    </div>
 
                 </Modal>
 

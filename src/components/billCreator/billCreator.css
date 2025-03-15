@@ -1,9 +1,7 @@
 .main-container-bill-creator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #ffffff;
+    
+    background-color: #181A1B;
+    width: 70vw;
 }
 
 .form-container-bill-creator {
@@ -11,7 +9,7 @@
     flex-wrap: wrap;
     gap: 16px;
     max-width: 600px;
-    background-color: #ffffff;
+    background-color: #181A1B;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
