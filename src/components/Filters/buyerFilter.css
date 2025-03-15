@@ -1,6 +1,14 @@
 .wrapper-filter-buttons {
     display: flex;
     gap: 5px;
+    overflow-x: auto;
+    padding-inline: 10px;
+    margin-inline: -10px;
+    scrollbar-width: none;
+}
+
+.wrapper-filter-buttons::-webkit-scrollbar {
+    display: none;
 }
 
 .wrapper-filter-buttons > button {
