@@ -45,7 +45,6 @@
     transform: translate(-50%, -50%);
     overflow-y: auto;
     border: none;
-    border-radius: 12px;
 }
 
 .close-modal-button {
