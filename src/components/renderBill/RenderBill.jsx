@@ -1,13 +1,12 @@
+import { useState, useEffect } from "react";
 import { client, topic } from "../../connection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
 import BuyerFilter from "../Filters/BuyerFilter";
 
-import { message } from "../../assets/hardCoded";
-
 const RenderBill = () => {
-    /* const [message, setMessage] = useState([]); */
+    const [message, setMessage] = useState([]);
     
 
     function dateFormatter(date) {
@@ -31,16 +30,16 @@ const RenderBill = () => {
 
     }
 
-    /* useEffect(() => {
+    useEffect(() => {
         client.subscribe(topic);
         client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
-        client.on('message', (topic, payload) => {
-            if (topic == "finance-bills-app") {
+        client.on('message', (currentTopic, payload) => {
+            if (currentTopic == topic) {
                 setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
             }
         });
-    }, []); */
+    }, []);
 
     return (
         <div className="wrapper-container-bills-card">
@@ -80,7 +79,7 @@ const RenderBill = () => {
                                             className="trash-icon"
                                             onClick={() => {
                                                 client.publish(`${topic}-delete`, `${bill.id}`)
-                                                window.location.reload();
+                                                //window.location.reload();
                                             }}
                                         />
                                     </div>
@@ -90,7 +89,7 @@ const RenderBill = () => {
                             </div>
                         )
                     }) :
-                    <p className="text-nothing-to-show">Nada a mostrar</p>
+                    <p className="text-nothing-to-show">Carregando...</p>
             }
         </div>
     )

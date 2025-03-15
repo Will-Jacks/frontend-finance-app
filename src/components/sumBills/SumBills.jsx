@@ -12,8 +12,8 @@ function SumBills() {
     useEffect(() => {
         client.subscribe(topic);
 
-        client.on('message', (topic, payload) => {
-            if (topic == "finance-bills-app") {
+        client.on('message', (currentTopic, payload) => {
+            if (currentTopic == topic) {
                 setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
             }
         });

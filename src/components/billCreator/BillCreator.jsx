@@ -49,7 +49,7 @@ const BillCreator = () => {
 
         setTitulo("")
         setValor("")
-        window.location.reload();
+        //window.location.reload();
     }
 
     return (
