@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SumBills from "../sumBills/SumBills";
 import Modal from 'react-modal';
 import BillCreator from "../billCreator/BillCreator";
@@ -19,6 +19,19 @@ function BottomComponent() {
         setIsModalOpen(false);
     }
 
+    useEffect(()=>{
+        if(isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        }else {
+            document.body.style.overflow = 'auto'
+        }
+        
+        return() => {
+            document.body.style.overflow = 'auto'
+        }
+    },[isModalOpen])
+
+
     return (
         <div className="main-container-bottom-component">
             <SumBills />
@@ -34,7 +47,10 @@ function BottomComponent() {
                     isOpen={isModalOpen}
                     onRequestClose={closeModal}
                     contentLabel="Adicione uma nova conta"
+                    appElement={document.querySelector('#root')}
+                    className='create-bill-modal'
                 >
+                    
                     <button onClick={closeModal}>X</button>
                     <BillCreator />
 

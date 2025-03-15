@@ -5,8 +5,10 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
 import BuyerFilter from "../Filters/BuyerFilter";
 
+import { message } from "../../assets/hardCoded";
+
 const RenderBill = () => {
-    const [message, setMessage] = useState([]);
+    /* const [message, setMessage] = useState([]); */
     
 
     function dateFormatter(date) {
@@ -30,7 +32,7 @@ const RenderBill = () => {
 
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         client.subscribe(topic);
         client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
@@ -39,7 +41,7 @@ const RenderBill = () => {
                 setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
             }
         });
-    }, []);
+    }, []); */
 
     return (
         <div className="wrapper-container-bills-card">

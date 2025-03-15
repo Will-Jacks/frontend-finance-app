@@ -1,4 +1,4 @@
-.main-container-bottom-component{
+.main-container-bottom-component {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    
+
     border: 1px solid rgb(44, 44, 44);
     border-radius: 3px;
 
@@ -17,7 +17,7 @@
 
 .button-add-bill {
     width: 30px;
-    height: 30px; 
+    height: 30px;
     border: none;
     font-size: 15px;
     border-radius: 50%;
@@ -38,9 +38,14 @@
     transform: scale(1.1);
 }
 
+.create-bill-modal {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 @media (min-width: 767px) {
     .main-container-bottom-component {
         width: 99%;
-        
+
     }
 }
