@@ -51,7 +51,7 @@ function BottomComponent() {
                     className='create-bill-modal'
                 >
 
-                    <div className="wrapper-create-bill-modal">
+                    <div className="wrapper-create-bill-form">
                         <button
                             onClick={closeModal}
                             className="close-modal-button"
