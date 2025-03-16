@@ -1,7 +1,7 @@
 .main-container-bill-creator {
     
     background-color: #181A1B;
-    width: 70vw;
+    width: 85vw;
     border-radius: 20px;
 }
 
@@ -62,4 +62,10 @@
 
 .toggle-form-button:hover {
     background-color: #218838;
+}
+
+@media (min-width: 768px) {
+    .main-container-bill-creator {
+        width: 40vw;
+    }
 }
