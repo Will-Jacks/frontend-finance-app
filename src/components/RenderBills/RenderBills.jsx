@@ -5,7 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
 import BuyerFilter from "../Filters/BuyerFilter";
 
-const RenderBill = () => {
+export default function RenderBills () {
     const [message, setMessage] = useState([]);
     
 
@@ -95,4 +95,3 @@ const RenderBill = () => {
     )
 };
 
-export default RenderBill;

@@ -1,6 +1,7 @@
-import BottomComponent from './components/BottomComponent/BottomComponent';
-import Headers from './components/Headers/Header';
-import RenderBill from './components/RenderBill/RenderBill';
+import BottomComponent from './components/BottomComponent/BottomComponent.jsx';
+import Headers from './components/Headers/Header.jsx';
+import RenderBills from './components/RenderBills/RenderBills.jsx';
+
 
 
 function App() {
@@ -8,8 +9,8 @@ function App() {
   return (
     <>
       <Headers />
-      <RenderBill />
       <BottomComponent />
+      <RenderBills />
     </>
   )
 }
