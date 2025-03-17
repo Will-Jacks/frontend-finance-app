@@ -89,7 +89,7 @@ const RenderBill = () => {
                             </div>
                         )
                     }) :
-                    <p className="text-nothing-to-show">Carregando...</p>
+                    <p className="text-nothing-to-show">Nenhuma conta a ser exibida no momento. Tente novamente mais tarde</p>
             }
         </div>
     )

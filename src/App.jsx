@@ -1,6 +1,6 @@
 import BottomComponent from './components/BottomComponent/BottomComponent';
-import Header from './components/header/Header';
-import RenderBill from './components/renderBill/RenderBill';
+import Header from './components/Header/Header';
+import RenderBill from './components/RenderBill/RenderBill';
 
 
 function App() {
