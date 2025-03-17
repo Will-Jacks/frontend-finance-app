@@ -1,5 +1,5 @@
 import BottomComponent from './components/BottomComponent/BottomComponent';
-import Header from './components/Header/Header';
+import Headers from './components/Headers/Header';
 import RenderBill from './components/RenderBill/RenderBill';
 
 
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Headers />
       <RenderBill />
       <BottomComponent />
     </>

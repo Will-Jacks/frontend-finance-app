@@ -1,6 +1,6 @@
 import "./header.css";
 
-const Header = () => {
+export default function Headers () {
 
     return (
         <header className="header-container">
@@ -8,5 +8,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header;
