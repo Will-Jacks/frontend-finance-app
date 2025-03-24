@@ -31,14 +31,21 @@ export default function RenderBills () {
     }
 
     useEffect(() => {
+        const handleMessage = (currentTopic, payload) => {
+            if(currentTopic == topic) {
+                setMessage([...message, ...JSON.parse(payload.toString())]);
+            }
+        }
         client.subscribe(topic);
         client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
-        client.on('message', (currentTopic, payload) => {
-            if (currentTopic == topic) {
-                setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
-            }
-        });
+        client.on('message', handleMessage);
+
+        return () => {
+            client.off('message', handleMessage)
+            client.unsubscribe(topic);
+            //Fecha a conexão com o tópico para deixar de consumir bandwidth
+        }
     }, []);
 
     return (
