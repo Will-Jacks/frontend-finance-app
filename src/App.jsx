@@ -1,17 +1,17 @@
-import BottomComponent from './components/BottomComponent/BottomComponent.jsx';
-import Headers from './components/Headers/Header.jsx';
-import RenderBills from './components/RenderBills/RenderBills.jsx';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home";
+import Banks from "./pages/Banks";
 
 
 function App() {
 
   return (
-    <>
-      <Headers />
-      <BottomComponent />
-      <RenderBills />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/banks" element={<Banks />} />
+      </Routes>
+    </Router>
   )
 }
 
