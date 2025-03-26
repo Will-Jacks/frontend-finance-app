@@ -22,7 +22,7 @@ const BillCreator = () => {
     }
 
     const [titulo, setTitulo] = useState("");
-    const [valor, setValor] = useState("");
+    const [valor, setValor] = useState(0);
     const [banco, setBanco] = useState("Nubank");
     const [comprador, setComprador] = useState("Lívia");
     const [categoria, setCategoria] = useState("Alimentação");
@@ -43,13 +43,12 @@ const BillCreator = () => {
 
         
 
-        const bill = new Bill(capitalizeFirstLetter(titulo), valor, banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
+        const bill = new Bill(capitalizeFirstLetter(titulo), valor.toFixed(2), banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
 
-        setTitulo("")
-        setValor("")
-        //window.location.reload();
+        setTitulo("");
+        setValor(0);
     }
 
     return (
