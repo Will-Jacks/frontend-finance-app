@@ -2,7 +2,7 @@ import { useState } from "react";
 import { client, topic } from "../../connection";
 import "./billCreator.css";
 
-export class Bill {
+class Bill {
     constructor(titulo, valor, banco, comprador, categoria, data, hora) {
 
         this.titulo = titulo;
@@ -15,7 +15,7 @@ export class Bill {
     }
 }
 
-const BillCreator = () => {
+function BillCreator() {
 
     const sendMessage = (data) => {
         client.publish(`${topic}-post`, data);
@@ -40,21 +40,15 @@ const BillCreator = () => {
     function onSubmit(e) {
         e.preventDefault();
         const currentDate = new Date(); // Captura a data atual do sistema quando
-
-        
-
         const bill = new Bill(capitalizeFirstLetter(titulo), valor.toFixed(2), banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
-
         setTitulo("");
         setValor(0);
     }
 
     return (
         <div className="main-container-bill-creator">
-
-
             <form onSubmit={onSubmit} className="form-container-bill-creator">
                 <label>Título</label>
                 <input

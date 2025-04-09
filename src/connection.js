@@ -6,11 +6,11 @@ const url = "wss://broker.emqx.io:8084/mqtt";
 function connectMQTTBroker(url) {
     const client = mqtt.connect(url);
     client.on('connect', () => {
-        console.log("Conectado ao broker com sucesso!");
+        return;
     });
     client.on('error', (error) => console.log(error));
 
     return client;
 }
 export const client = connectMQTTBroker(url);
-export const topic = "finance-bills-app-localhost-broker";
+export const topic = "finance-bills-app";

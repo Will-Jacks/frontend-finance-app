@@ -1,6 +1,6 @@
 import "./header.css";
 
-export default function Headers () {
+function Headers () {
 
     return (
         <header className="header-container">
@@ -8,3 +8,5 @@ export default function Headers () {
         </header>
     )
 }
+
+export default Headers;

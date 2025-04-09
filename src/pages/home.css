@@ -1,0 +1,30 @@
+.fab {
+    position: fixed;
+    bottom: 5rem; /* Acima do BottomComponent */
+    right: 1.5rem;
+    background-color: #2e2e2e;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fab:hover {
+    background-color: #444;
+    transform: scale(1.05);
+}
+
+@media(min-width: 767px) {
+    .fab {
+        right: 6rem;
+    }
+}

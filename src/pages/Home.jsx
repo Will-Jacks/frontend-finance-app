@@ -2,13 +2,24 @@ import BottomComponent from "../components/BottomComponent/BottomComponent";
 import Headers from "../components/Headers/Header";
 import RenderBills from "../components/RenderBills/RenderBills";
 
-export default function Home () {
+import { useNavigate } from 'react-router-dom';
 
-    return(
+import "./home.css";
+
+function Home() {
+    const navigate = useNavigate();
+
+    return (
         <>
             <Headers />
             <RenderBills />
+            {/* Floating Action Button */}
+            <button className="fab" onClick={() => navigate("/generalBills")}>
+                📊
+            </button>
             <BottomComponent />
         </>
     )
 }
+
+export default Home;
