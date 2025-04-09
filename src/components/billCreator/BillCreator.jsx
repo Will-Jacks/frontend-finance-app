@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { client, topic } from "../../connection";
 import "./billCreator.css";
 
@@ -16,7 +16,7 @@ class Bill {
 }
 
 function BillCreator() {
-
+    const inputRef= useRef(null); // Serve para selecionar o input ao receber foco
     const sendMessage = (data) => {
         client.publish(`${topic}-post`, data);
     }
@@ -66,6 +66,8 @@ function BillCreator() {
                     placeholder="Digite aqui"
                     value={valor}
                     onChange={(e) => { setValor(e.target.value) }}
+                    onFocus={()=> inputRef.current.select()}
+                    ref={inputRef}
                     required
                 />
 
