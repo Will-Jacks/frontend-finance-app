@@ -5,9 +5,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
 import BuyerFilter from "../Filters/BuyerFilter";
 
-export default function RenderBills () {
+function RenderBills() {
     const [message, setMessage] = useState([]);
-    
+
 
     function dateFormatter(date) {
         const month = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
@@ -31,14 +31,21 @@ export default function RenderBills () {
     }
 
     useEffect(() => {
+        const handleMessage = (currentTopic, payload) => {
+            if (currentTopic == topic) {
+                setMessage([...message, ...JSON.parse(payload.toString())]);
+            }
+        }
         client.subscribe(topic);
         client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
-        client.on('message', (currentTopic, payload) => {
-            if (currentTopic == topic) {
-                setMessage([...message, ...JSON.parse(payload.toString())]); // ... Serve para desestruturar o JSON
-            }
-        });
+        client.on('message', handleMessage);
+
+        return () => {
+            client.off('message', handleMessage)
+            client.unsubscribe(topic);
+            //Fecha a conexão com o tópico para deixar de consumir bandwidth
+        }
     }, []);
 
     return (
@@ -46,8 +53,6 @@ export default function RenderBills () {
             <div className="container-filter-buttons">
                 <BuyerFilter />
             </div>
-
-
 
             {
                 message.length > 0 ?
@@ -91,7 +96,9 @@ export default function RenderBills () {
                     }) :
                     <p className="text-nothing-to-show">Nenhuma conta a ser exibida no momento. Tente novamente mais tarde</p>
             }
+            <div className="blank-space"></div>
         </div>
     )
 };
 
+export default RenderBills;

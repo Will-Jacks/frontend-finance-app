@@ -1,17 +1,18 @@
-import BottomComponent from './components/BottomComponent/BottomComponent.jsx';
-import Headers from './components/Headers/Header.jsx';
-import RenderBills from './components/RenderBills/RenderBills.jsx';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Home from "./pages/Home";
+import GeneralBills from "./pages/GeneralBills";
 
 
 
 function App() {
 
   return (
-    <>
-      <Headers />
-      <BottomComponent />
-      <RenderBills />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/generalBills" element={<GeneralBills />} />
+      </Routes>
+    </Router>
   )
 }
 
