@@ -65,7 +65,7 @@ function BillCreator() {
                     type="number"
                     placeholder="Digite aqui"
                     value={valor}
-                    onChange={(e) => { setValor(e.target.value) }}
+                    onChange={(e) => { setValor(Number(e.target.value)) }}
                     onFocus={()=> inputRef.current.select()}
                     ref={inputRef}
                     required
