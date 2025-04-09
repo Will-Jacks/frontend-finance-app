@@ -17,12 +17,9 @@ function GeneralBills() {
         function handleMessage(currentTopic, payload) {
             if (currentTopic == `${topic}-generalBills`) {
                 const groupedData = groupByBank(JSON.parse(payload.toString()));
-                console.log(groupedData);
-                console.log("Chegou até aqui");
                 setMessage(groupedData);
             }
         }
-        console.log("useEffect!")
         client.subscribe(`${topic}-generalBills`);
         client.publish(`${topic}-generalBills-getData`, '.'); // Dispara o método GET no backend MQTT
 

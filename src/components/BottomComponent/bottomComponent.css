@@ -55,8 +55,7 @@
     border-radius: 10px;
     padding: 20px;
     max-height: 90vh;
-    width: 90%;
-    max-width: 400px;
+    width: 80%;
     overflow-y: auto;
     border: 1px solid rgb(44, 44, 44);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
@@ -110,7 +109,7 @@
 /* Responsivo para telas maiores */
 @media (min-width: 767px) {
     .create-bill-modal {
-        width: 400px;
+        max-width: 550px;
     }
     .fab-add-button {
         right: 6rem;
