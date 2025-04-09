@@ -1,7 +1,7 @@
 import "./buyerFilter.css";
 import { client, topic } from "../../connection";
 
-export default function BuyerFilter() {
+function BuyerFilter() {
 
 
     return (
@@ -28,3 +28,5 @@ export default function BuyerFilter() {
         </div>
     )
 }
+
+export default BuyerFilter;

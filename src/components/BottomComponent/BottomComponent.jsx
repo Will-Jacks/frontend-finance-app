@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import SumBills from "../sumBills/SumBills";
 import Modal from 'react-modal';
 import BillCreator from "../billCreator/BillCreator";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
 
@@ -25,48 +24,45 @@ function BottomComponent() {
         } else {
             document.body.style.overflow = 'auto'
         }
-
         return () => {
             document.body.style.overflow = 'auto'
         }
-    }, [isModalOpen])
-
+    }, [isModalOpen]);
 
     return (
-        <div className="main-container-bottom-component">
-            <SumBills />
-            <div>
+        <>
+            {/* FAB flutuante */}
+            <button
+                onClick={openModal}
+                className="fab-add-button"
+            >
+                <FontAwesomeIcon icon={faPlus} />
+            </button>
 
+            {/* Modal de criação */}
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Adicione uma nova conta"
+                appElement={document.querySelector('#root')}
+                className="create-bill-modal"
+                overlayClassName="modal-overlay"
+                closeTimeoutMS={300}
+                ariaHideApp={false}
+            >
                 <button
-                    onClick={openModal}
-                    className='button-add-bill'
+                    onClick={closeModal}
+                    className="close-modal-button"
                 >
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faCircleXmark} />
                 </button>
-                <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={closeModal}
-                    contentLabel="Adicione uma nova conta"
-                    appElement={document.querySelector('#root')}
-                    className='create-bill-modal'
-                >
 
-                    <div className="wrapper-create-bill-form">
-                        <button
-                            onClick={closeModal}
-                            className="close-modal-button"
-                        >
-                            <FontAwesomeIcon icon={faXmark} />
-                        </button>
-                        <BillCreator />
-                    </div>
-
-                </Modal>
-
-            </div>
-        </div>
-    )
-
+                <div className="wrapper-create-bill-form">
+                    <BillCreator />
+                </div>
+            </Modal >
+        </>
+    );
 }
 
 export default BottomComponent;
