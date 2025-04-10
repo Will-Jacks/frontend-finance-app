@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from 'react-modal';
-import BillCreator from "../billCreator/BillCreator";
+import BillForm from "../BillForm/BillForm";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -59,7 +59,7 @@ function BottomComponent({ message, setMessage }) {
                 </button>
 
                 <div className="wrapper-create-bill-form">
-                    <BillCreator
+                    <BillForm
                         message={message}
                         setMessage={setMessage}
                     />

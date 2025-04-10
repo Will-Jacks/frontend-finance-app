@@ -21,7 +21,7 @@ class Bill {
     }
 }
 
-function BillCreator({ message, setMessage }) {
+function BillForm({ message, setMessage }) {
     const inputRef = useRef(null); // Serve para selecionar o input ao receber foco
     const { client } = useMQTT();
 
@@ -129,4 +129,4 @@ function BillCreator({ message, setMessage }) {
     )
 }
 
-export default BillCreator;
+export default BillForm;
