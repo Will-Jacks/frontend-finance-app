@@ -7,7 +7,7 @@ import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
 
-function BottomComponent() {
+function BottomComponent({ message, setMessage }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     function openModal() {
@@ -16,6 +16,7 @@ function BottomComponent() {
 
     function closeModal() {
         setIsModalOpen(false);
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -58,7 +59,10 @@ function BottomComponent() {
                 </button>
 
                 <div className="wrapper-create-bill-form">
-                    <BillCreator />
+                    <BillCreator
+                        message={message}
+                        setMessage={setMessage}
+                    />
                 </div>
             </Modal >
         </>

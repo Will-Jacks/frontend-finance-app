@@ -113,3 +113,27 @@
 .blank-space {
     height: 130px;
 }
+
+
+
+/* Animações da lib */
+.bills-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .bills-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .bills-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .bills-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  

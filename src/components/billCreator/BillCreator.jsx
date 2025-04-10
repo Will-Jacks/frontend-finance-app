@@ -6,6 +6,7 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 
 //Estilização
 import "./billCreator.css";
+import { toast } from "react-toastify";
 
 class Bill {
     constructor(titulo, valor, banco, comprador, categoria, data, hora) {
@@ -20,7 +21,7 @@ class Bill {
     }
 }
 
-function BillCreator() {
+function BillCreator({ message, setMessage }) {
     const inputRef = useRef(null); // Serve para selecionar o input ao receber foco
     const { client } = useMQTT();
 
@@ -50,6 +51,8 @@ function BillCreator() {
         const bill = new Bill(capitalizeFirstLetter(titulo), valor.toFixed(2), banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
         const formattedMessage = JSON.stringify(bill);
         sendMessage(formattedMessage);
+        setMessage([bill, ...message]);
+        toast.success('Conta nova criada!');
         setTitulo("");
         setValor(0);
     }
