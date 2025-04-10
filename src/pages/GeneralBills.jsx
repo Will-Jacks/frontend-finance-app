@@ -1,36 +1,41 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
+//Urls MQTT
+import useMQTT from "../hooks/useMQTT";
+import { MQTT_TOPIC } from "../context/MQTTContext";
+
+//Componentes
 import BankCard from "../components/BankCard/BankCard";
 import Headers from "../components/Headers/Header";
 
-import { useEffect, useState } from "react";
-import { client, topic } from "../connection";
-
-import { useNavigate } from 'react-router-dom';
-
+//Estilização
 import "./generalBills.css"
 
 function GeneralBills() {
-    const navigate = useNavigate();
-
     const [message, setMessage] = useState({});
+    const navigate = useNavigate();
+    const { client } = useMQTT();
 
     useEffect(() => {
+        if(!client) return;
+
         function handleMessage(currentTopic, payload) {
-            if (currentTopic == `${topic}-generalBills`) {
+            if (currentTopic === `${MQTT_TOPIC}-generalBills`) {
                 const groupedData = groupByBank(JSON.parse(payload.toString()));
                 setMessage(groupedData);
             }
         }
-        client.subscribe(`${topic}-generalBills`);
-        client.publish(`${topic}-generalBills-getData`, '.'); // Dispara o método GET no backend MQTT
-
+        client.subscribe(`${MQTT_TOPIC}-generalBills`);
+        client.publish(`${MQTT_TOPIC}-generalBills-getData`, '.'); // Dispara o método GET no backend MQTT
         client.on('message', handleMessage);
 
         return () => {
             client.off('message', handleMessage)
-            client.unsubscribe(topic);
+            client.unsubscribe(`${MQTT_TOPIC}-generalBills`);
             //Fecha a conexão com o tópico para deixar de consumir bandwidth
         }
-    }, []);
+    }, [client]);
 
     function groupByBank(data) {
         return data.reduce((acc, { comprador, banco, valor }) => {
@@ -48,7 +53,7 @@ function GeneralBills() {
     return (
         <div className="general-bills-container">
             <Headers />
-            <button className="back-button" onClick={()=> navigate("/")}>⬅ Início</button>
+            <button className="back-button" onClick={() => navigate("/")}>⬅ Início</button>
             {Object.entries(message).map(([banco, compradores]) => (
                 <BankCard key={banco} banco={banco} compradores={compradores} />
             ))}

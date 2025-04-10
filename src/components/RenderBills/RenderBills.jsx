@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
-import { client, topic } from "../../connection";
+
+//Conexões mqtt
+import useMQTT from "../../hooks/useMQTT";
+import { MQTT_TOPIC } from "../../context/MQTTContext";
+
+//Estilização
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './renderBill.css';
+
+//Componentes
 import BuyerFilter from "../Filters/BuyerFilter";
 
 function RenderBills() {
     const [message, setMessage] = useState([]);
+
+    const { client } = useMQTT();
 
 
     function dateFormatter(date) {
@@ -31,22 +40,23 @@ function RenderBills() {
     }
 
     useEffect(() => {
+        if (!client) return;
+
         const handleMessage = (currentTopic, payload) => {
-            if (currentTopic == topic) {
+            if (currentTopic === MQTT_TOPIC) {
                 setMessage([...message, ...JSON.parse(payload.toString())]);
             }
         }
-        client.subscribe(topic);
-        client.publish(`${topic}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
+        client.subscribe(MQTT_TOPIC);
+        client.publish(`${MQTT_TOPIC}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
 
         client.on('message', handleMessage);
 
         return () => {
             client.off('message', handleMessage)
-            client.unsubscribe(topic);
-            //Fecha a conexão com o tópico para deixar de consumir bandwidth
+            client.unsubscribe(MQTT_TOPIC);
         }
-    }, []);
+    }, [client]);
 
     return (
         <div className="wrapper-container-bills-card">
@@ -83,7 +93,7 @@ function RenderBills() {
                                             icon={faTrash}
                                             className="trash-icon"
                                             onClick={() => {
-                                                client.publish(`${topic}-delete`, `${bill.id}`)
+                                                client.publish(`${MQTT_TOPIC}-delete`, `${bill.id}`)
                                                 //window.location.reload();
                                             }}
                                         />

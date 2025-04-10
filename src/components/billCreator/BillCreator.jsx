@@ -1,5 +1,10 @@
 import { useRef, useState } from "react";
-import { client, topic } from "../../connection";
+
+//Urls MQTT
+import useMQTT from "../../hooks/useMQTT";
+import { MQTT_TOPIC } from "../../context/MQTTContext";
+
+//Estilização
 import "./billCreator.css";
 
 class Bill {
@@ -16,9 +21,11 @@ class Bill {
 }
 
 function BillCreator() {
-    const inputRef= useRef(null); // Serve para selecionar o input ao receber foco
+    const inputRef = useRef(null); // Serve para selecionar o input ao receber foco
+    const { client } = useMQTT();
+
     const sendMessage = (data) => {
-        client.publish(`${topic}-post`, data);
+        client.publish(`${MQTT_TOPIC}-post`, data);
     }
 
     const [titulo, setTitulo] = useState("");
@@ -66,7 +73,7 @@ function BillCreator() {
                     placeholder="Digite aqui"
                     value={valor}
                     onChange={(e) => { setValor(Number(e.target.value)) }}
-                    onFocus={()=> inputRef.current.select()}
+                    onFocus={() => inputRef.current.select()}
                     ref={inputRef}
                     required
                 />
