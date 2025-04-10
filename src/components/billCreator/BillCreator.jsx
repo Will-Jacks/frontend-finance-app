@@ -81,6 +81,7 @@ function BillCreator() {
                     <option value="Santander">Santander</option>
                     <option value="C6">C6</option>
                     <option value="Will Bank">Will Bank</option>
+                    <option value="Bradesco">Bradesco</option>
                 </select>
 
                 <label htmlFor="">Comprador</label>

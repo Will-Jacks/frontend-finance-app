@@ -36,6 +36,10 @@
     font-weight: 400;
 }
 
+.form-container-bill-creator option{
+    background-color: #181A1B;
+}
+
 .form-container-bill-creator button {
     width: 100%;
     padding: 10px;
