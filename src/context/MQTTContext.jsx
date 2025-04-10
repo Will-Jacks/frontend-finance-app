@@ -21,12 +21,12 @@ export const MQTTProvider = ({ children }) => {
         });
 
         mqttClient.on('error', () => {
-            toast.error('Não foi possível conectar ao servidor!');
+            toast.error('Erro!');
             mqttClient.end();
         });
 
         mqttClient.on('offline', () => {
-            toast.warn('Conexão perdida com o servidor!');
+            toast.error('Não foi possível conectar ao servidor!');
             setIsConnected(false);
         });
 
