@@ -138,11 +138,12 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                     value={categoria}
                     onChange={(e) => { setCategoria(e.target.value) }}>
                     <option value="Alimentação">Alimentação</option>
-                    <option value="Gasolina">Gasolina</option>
-                    <option value="Cosméticos">Cosméticos</option>
-                    <option value="Contas Fixas">Contas fixas</option>
-                    <option value="Roupas">Roupas</option>
                     <option value="Assinaturas">Assinaturas</option>
+                    <option value="Contas Fixas">Contas fixas</option>
+                    <option value="Cosméticos">Cosméticos</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Pets">Pets</option>
+                    <option value="Roupas">Roupas</option>
                     <option value="Outros">Outros</option>
                 </select>
 
