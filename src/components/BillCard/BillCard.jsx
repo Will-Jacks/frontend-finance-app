@@ -22,6 +22,7 @@ function BillCard({ bill, onDelete, onEdit }) {
             <div className="wrapper-billCategory-trashIcon">
                 <p className="bill-category">{bill.categoria}</p>
                 <div className="wrapper-trash-icon">
+                    <button onClick={onEdit}>✏️</button>
                     <FontAwesomeIcon
                         icon={faTrash}
                         className="trash-icon"
@@ -29,7 +30,6 @@ function BillCard({ bill, onDelete, onEdit }) {
                     />
                 </div>
             </div>
-            <button onClick={onEdit} style={{justifySelf: "flex-end", width: "50px", marginTop: "10px"}}>✏️</button>
         </div>
     )
 }

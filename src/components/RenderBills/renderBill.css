@@ -1,9 +1,9 @@
 .container-filter-buttons {
     display: flex;
-    margin: 5px 0px 10px 0px ;
+    margin: 5px 0px 10px 0px;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 .text-nothing-to-show {
@@ -23,7 +23,7 @@
     border-bottom: 1px solid rgb(44, 44, 44);
     padding: 8px;
     margin: 5px 0px 10px;
-    
+
     display: flex;
     flex-direction: column;
 }
@@ -36,7 +36,7 @@
     margin-bottom: 3px;
 }
 
-.bill-title{
+.bill-title {
     display: flex;
     font-size: 20px;
     color: white;
@@ -60,7 +60,7 @@
     align-items: center;
     border: none;
     border-radius: 10px;
-    
+
     margin-top: 4px;
     font-size: 12px;
     width: 50px;
@@ -76,7 +76,7 @@
 
 .bank-title.santander {
     background-color: rgb(255, 0, 0);
-    
+
     color: rgb(128, 0, 0);
 }
 
@@ -88,13 +88,14 @@
 .wrapper-billCategory-trashIcon {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .bill-value {
     color: rgb(175, 175, 175);
 }
 
-.bill-category{
+.bill-category {
     margin-top: 5px;
     color: rgb(175, 175, 175);
     font-size: 12px;
@@ -102,7 +103,19 @@
 
 .wrapper-trash-icon {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.wrapper-trash-icon>button:hover {
+    cursor: pointer;
+}
+
+.wrapper-trash-icon>button {
+    background-color: transparent;
+    padding: 5px;
+    border: none;
 }
 
 .trash-icon:hover {
@@ -120,20 +133,21 @@
 .bills-enter {
     opacity: 0;
     transform: scale(0.95);
-  }
-  .bills-enter-active {
+}
+
+.bills-enter-active {
     opacity: 1;
     transform: scale(1);
     transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .bills-exit {
+}
+
+.bills-exit {
     opacity: 1;
     transform: scale(1);
-  }
-  .bills-exit-active {
+}
+
+.bills-exit-active {
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
+}

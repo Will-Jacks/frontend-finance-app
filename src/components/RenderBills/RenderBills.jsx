@@ -37,9 +37,14 @@ function RenderBills({ message, setMessage, setEditingBill }) {
     }, [client]);
 
     function onDelete(id) {
-        client.publish(`${MQTT_TOPIC}-delete`, String(id));
-        const newArr = message.filter(bill => bill.id !== id);
-        setMessage(newArr);
+        const confirm = window.confirm("Deseja realmente excluir?");
+        if(confirm) {
+            client.publish(`${MQTT_TOPIC}-delete`, String(id));
+            const newArr = message.filter(bill => bill.id !== id);
+            setMessage(newArr);
+        }else {
+            return;
+        }
     }
 
     return (
