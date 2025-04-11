@@ -74,7 +74,7 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                 currentDate.toLocaleDateString('pt-BR'),
                 currentDate.toLocaleTimeString('pt-BR')
             );
-            const formattedMessage = JSON.stringify(bill);
+            const formattedMessage = JSON.stringify(newBill);
             sendMessage(formattedMessage);
             setMessage([newBill, ...message]);
             toast.success('Conta nova criada!');
