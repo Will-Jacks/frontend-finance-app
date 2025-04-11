@@ -146,7 +146,7 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                     <option value="Outros">Outros</option>
                 </select>
 
-                <button type="submit">Criar</button>
+                <button type="submit">Confirmar</button>
             </form>
 
 
