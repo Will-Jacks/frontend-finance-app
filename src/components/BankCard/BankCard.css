@@ -34,3 +34,11 @@
 .bank-card.santander {
     border-left-color: #EC0000; /* Vermelho Santander */
 }
+
+.bank-card.c6 {
+    border-left-color: white;
+}
+
+.bank-card.will {
+    border-left-color: yellow;
+}
