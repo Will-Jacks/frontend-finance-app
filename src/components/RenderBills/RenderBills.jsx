@@ -14,7 +14,7 @@ import BuyerFilter from "../Filters/BuyerFilter";
 //Util
 import BillCard from "../BillCard/BillCard";
 
-function RenderBills({ message, setMessage }) {
+function RenderBills({ message, setMessage, setEditingBill }) {
     const { client } = useMQTT();
 
     useEffect(() => {
@@ -64,9 +64,10 @@ function RenderBills({ message, setMessage }) {
                                 classNames="bills"
                             >
                                 <BillCard
-
                                     bill={bill}
-                                    onDelete={id => onDelete(id)} />
+                                    onDelete={id => onDelete(id)}
+                                    onEdit={()=> setEditingBill(bill)}
+                                />
                             </CSSTransition>
                         );
                     })

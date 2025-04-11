@@ -14,13 +14,16 @@ import "./home.css";
 function Home() {
     const navigate = useNavigate();
     const [message, setMessage] = useState([]);
+    const [editingBill, setEditingBill] = useState(null);
 
     return (
         <>
             <Headers />
             <RenderBills
                 message={message}
-                setMessage={setMessage} />
+                setMessage={setMessage}
+                setEditingBill={setEditingBill}
+            />
             {/* Floating Action Button */}
             <button className="fab" onClick={() => navigate("/generalBills")}>
                 📊
@@ -28,6 +31,8 @@ function Home() {
             <BottomComponent
                 message={message}
                 setMessage={setMessage}
+                editingBill={editingBill}
+                setEditingBill={setEditingBill}
             />
         </>
     )

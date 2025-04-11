@@ -7,7 +7,7 @@ import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
 
-function BottomComponent({ message, setMessage }) {
+function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     function openModal() {
@@ -16,6 +16,7 @@ function BottomComponent({ message, setMessage }) {
 
     function closeModal() {
         setIsModalOpen(false);
+        setEditingBill(null);
         window.location.reload();
     }
 
@@ -29,6 +30,10 @@ function BottomComponent({ message, setMessage }) {
             document.body.style.overflow = 'auto'
         }
     }, [isModalOpen]);
+
+    useEffect(() => {
+        setIsModalOpen(!!editingBill); // abre se houver edição, fecha se for null
+    }, [editingBill]);
 
     return (
         <>
@@ -62,6 +67,8 @@ function BottomComponent({ message, setMessage }) {
                     <BillForm
                         message={message}
                         setMessage={setMessage}
+                        editingBill={editingBill}
+                        setEditingBill={setEditingBill}
                     />
                 </div>
             </Modal >

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
-function BillCard({ bill, onDelete }) {
+function BillCard({ bill, onDelete, onEdit }) {
 
     return (
         <div className="container-bills-card">
@@ -29,6 +29,7 @@ function BillCard({ bill, onDelete }) {
                     />
                 </div>
             </div>
+            <button onClick={onEdit} style={{justifySelf: "flex-end", width: "50px", marginTop: "10px"}}>✏️</button>
         </div>
     )
 }

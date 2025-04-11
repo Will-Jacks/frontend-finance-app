@@ -21,7 +21,7 @@ class Bill {
     }
 }
 
-function BillForm({ message, setMessage }) {
+function BillForm({ message, setMessage, editingBill, setEditingBill }) {
     const inputRef = useRef(null); // Serve para selecionar o input ao receber foco
     const { client } = useMQTT();
 
@@ -29,11 +29,11 @@ function BillForm({ message, setMessage }) {
         client.publish(`${MQTT_TOPIC}-post`, data);
     }
 
-    const [titulo, setTitulo] = useState("");
-    const [valor, setValor] = useState(0);
-    const [banco, setBanco] = useState("Nubank");
-    const [comprador, setComprador] = useState("Lívia");
-    const [categoria, setCategoria] = useState("Alimentação");
+    const [titulo, setTitulo] = useState(editingBill?.titulo || "");
+    const [valor, setValor] = useState(editingBill?.valor || 0);
+    const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
+    const [comprador, setComprador] = useState(editingBill?.comprador || "Lívia");
+    const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
 
 
     function capitalizeFirstLetter(title) {
@@ -47,12 +47,38 @@ function BillForm({ message, setMessage }) {
 
     function onSubmit(e) {
         e.preventDefault();
-        const currentDate = new Date(); // Captura a data atual do sistema quando
-        const bill = new Bill(capitalizeFirstLetter(titulo), valor.toFixed(2), banco, comprador, categoria, currentDate.toLocaleDateString('pt-BR'), currentDate.toLocaleTimeString('pt-BR'));
-        const formattedMessage = JSON.stringify(bill);
-        sendMessage(formattedMessage);
-        setMessage([bill, ...message]);
-        toast.success('Conta nova criada!');
+        if (editingBill) {
+            // 🛠️ Editando uma conta existente
+            const updatedBill = {
+                ...editingBill,
+                titulo,
+                valor: valor.toFixed(2),
+                banco,
+                comprador,
+                categoria
+            };
+
+            client.publish(`${MQTT_TOPIC}-put`, JSON.stringify(updatedBill));
+            const updatedList = message.map(b => b.id === updatedBill.id ? updatedBill : b);
+            setMessage(updatedList);
+            toast.success('Conta atualizada com sucesso!');
+            setEditingBill(null);
+        } else {
+            const currentDate = new Date();
+            const newBill = new Bill(
+                capitalizeFirstLetter(titulo),
+                valor.toFixed(2),
+                banco,
+                comprador,
+                categoria,
+                currentDate.toLocaleDateString('pt-BR'),
+                currentDate.toLocaleTimeString('pt-BR')
+            );
+            const formattedMessage = JSON.stringify(bill);
+            sendMessage(formattedMessage);
+            setMessage([newBill, ...message]);
+            toast.success('Conta nova criada!');
+        }
         setTitulo("");
         setValor(0);
     }
