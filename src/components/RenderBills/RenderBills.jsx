@@ -16,6 +16,7 @@ import BillCard from "../BillCard/BillCard";
 
 function RenderBills({ message, setMessage, setEditingBill }) {
     const { client } = useMQTT();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!client) return;
@@ -23,11 +24,12 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         const handleMessage = (currentTopic, payload) => {
             if (currentTopic === MQTT_TOPIC) {
                 setMessage([...message, ...JSON.parse(payload.toString())]);
+                setLoading(false);
             }
         }
         client.subscribe(MQTT_TOPIC);
         client.publish(`${MQTT_TOPIC}-get`, 'parcial-bills'); // Dispara o método GET no backend MQTT
-
+        setLoading(true); // Exibir carregamento
         client.on('message', handleMessage);
 
         return () => {
@@ -38,11 +40,11 @@ function RenderBills({ message, setMessage, setEditingBill }) {
 
     function onDelete(id) {
         const confirm = window.confirm("Deseja realmente excluir?");
-        if(confirm) {
+        if (confirm) {
             client.publish(`${MQTT_TOPIC}-delete`, String(id));
             const newArr = message.filter(bill => bill.id !== id);
             setMessage(newArr);
-        }else {
+        } else {
             return;
         }
     }
@@ -52,12 +54,14 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             <div className="container-filter-buttons">
                 <BuyerFilter />
             </div>
-            {
-                message.length === 0 && (
+            {loading ? (
+                <p className="text-loading">Carregando...</p>
+            ) :
+                message.length === 0 ? (
                     <p className="text-nothing-to-show">
                         Nenhuma conta a ser exibida no momento. Tente novamente mais tarde
                     </p>
-                )
+                ) : null
             }
             <TransitionGroup>
                 {
@@ -71,7 +75,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
                                 <BillCard
                                     bill={bill}
                                     onDelete={id => onDelete(id)}
-                                    onEdit={()=> setEditingBill(bill)}
+                                    onEdit={() => setEditingBill(bill)}
                                 />
                             </CSSTransition>
                         );

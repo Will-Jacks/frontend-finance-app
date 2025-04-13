@@ -13,6 +13,20 @@
     padding: 20px;
 }
 
+.text-loading {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+
 .wrapper-container-bills-card {
     display: flex;
     flex-direction: column;
