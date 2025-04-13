@@ -11,6 +11,8 @@ import Headers from "../components/Headers/Header";
 
 //Estilização
 import "./generalBills.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 function GeneralBills() {
     const [message, setMessage] = useState({});
@@ -18,7 +20,7 @@ function GeneralBills() {
     const { client } = useMQTT();
 
     useEffect(() => {
-        if(!client) return;
+        if (!client) return;
 
         function handleMessage(currentTopic, payload) {
             if (currentTopic === `${MQTT_TOPIC}-generalBills`) {
@@ -53,7 +55,10 @@ function GeneralBills() {
     return (
         <div className="general-bills-container">
             <Headers />
-            <button className="back-button" onClick={() => navigate("/")}>⬅ Início</button>
+            <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse}/> Início</button>
+            <div>
+                <h2 style={{textAlign: "justify"}}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
+            </div>
             {Object.entries(message).map(([banco, compradores]) => (
                 <BankCard key={banco} banco={banco} compradores={compradores} />
             ))}
