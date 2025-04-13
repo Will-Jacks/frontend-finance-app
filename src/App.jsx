@@ -1,11 +1,20 @@
+import { useEffect } from 'react';
+//Route
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+//Componentes
 import Home from "./pages/Home";
 import GeneralBills from "./pages/GeneralBills";
-import React from 'react';
-import { ToastContainer } from "react-toastify";
+//Utils
 import { MQTTProvider } from "./context/MQTTContext";
+import isTheFirstTime from "./utils/getUsername";
+//Estilização
+import { ToastContainer } from "react-toastify";
 
 function App() {
+
+  useEffect(() => {
+    isTheFirstTime();
+  }, [])
   return (
     <MQTTProvider>
       <Router>

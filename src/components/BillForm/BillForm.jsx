@@ -48,7 +48,7 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
     function onSubmit(e) {
         e.preventDefault();
         if (editingBill) {
-            // 🛠️ Editando uma conta existente
+            //Editando uma conta existente
             const updatedBill = {
                 ...editingBill,
                 titulo,
