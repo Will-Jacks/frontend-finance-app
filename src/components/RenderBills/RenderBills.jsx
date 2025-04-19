@@ -13,6 +13,7 @@ import BuyerFilter from "../Filters/BuyerFilter";
 
 //Util
 import BillCard from "../BillCard/BillCard";
+import { toast } from "react-toastify";
 
 function RenderBills({ message, setMessage, setEditingBill }) {
     const { client } = useMQTT();
@@ -38,15 +39,25 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         }
     }, [client]);
 
+
+
     function onDelete(id) {
         const confirm = window.confirm("Deseja realmente excluir?");
         if (confirm) {
             client.publish(`${MQTT_TOPIC}-delete`, String(id));
-            const newArr = message.filter(bill => bill.id !== id);
-            setMessage(newArr);
+            const messageWithoutExcludedBill = message.filter(bill => bill.id !== id);
+            setMessage(messageWithoutExcludedBill);
         } else {
             return;
         }
+    }
+
+    function toggleIsPaid(id) {
+        const updatedBills = message.map(b => b.id === id ? { ...b, isPaid: !b.isPaid } : b); // Atualiza no front
+        const billToggled = updatedBills.find(e => e.id === id); // Isola uma bill pra mandar pro back
+        setMessage(updatedBills);
+        client.publish(`${MQTT_TOPIC}-isPaid`, JSON.stringify(billToggled));
+        toast.success('Conta atualizada com sucesso!');
     }
 
     return (
@@ -76,6 +87,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
                                     bill={bill}
                                     onDelete={id => onDelete(id)}
                                     onEdit={() => setEditingBill(bill)}
+                                    toggleIsPaid={toggleIsPaid}
                                 />
                             </CSSTransition>
                         );

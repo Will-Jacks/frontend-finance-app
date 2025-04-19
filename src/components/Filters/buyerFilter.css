@@ -11,7 +11,7 @@
     display: none;
 }
 
-.wrapper-filter-buttons > button {
+.wrapper-filter-buttons>button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,8 @@
     font-size: 14px;
     font-weight: bold;
 }
-.wrapper-filter-buttons > button:hover {
+
+.wrapper-filter-buttons>button:hover {
     cursor: pointer;
     background-color: hsla(130, 100%, 59%, 0.226);
     color: hsla(130, 100%, 59%, 0.7);

@@ -1,0 +1,135 @@
+.container-bills-card {
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(44, 44, 44);
+    padding: 8px;
+    margin: 5px 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.title-date-div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.bill-title {
+    display: flex;
+    font-size: 20px;
+    color: white;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    align-self: flex-start;
+}
+
+.container-paid-circle-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper-is-paid-circle-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: currentColor;
+    transition: all 0.3s ease-in-out;
+}
+
+.paid {
+    background-color: #15ff00;
+}
+
+.not-paid {
+    background-color: #d50000;
+}
+
+.wrapper-billData-billBanco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bank-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+
+    margin-top: 4px;
+    font-size: 12px;
+    width: 50px;
+    height: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.bank-title.nubank {
+    background-color: purple;
+    color: white
+}
+
+.bank-title.santander {
+    background-color: rgb(255, 0, 0);
+
+    color: rgb(128, 0, 0);
+}
+
+.buyer {
+    margin-bottom: 5px;
+    color: rgb(175, 175, 175);
+}
+
+.bill-value {
+    color: rgb(175, 175, 175);
+}
+
+.wrapper-billCategory-trashIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.bill-category {
+    margin-top: 5px;
+    color: rgb(175, 175, 175);
+    font-size: 12px;
+}
+
+.wrapper-trash-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.wrapper-trash-icon>button:hover {
+    cursor: pointer;
+}
+
+.wrapper-trash-icon>button {
+    background-color: transparent;
+    padding: 5px;
+    border: none;
+}
+
+.trash-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

@@ -4,16 +4,23 @@ import dateFormatter from "../../utils/dateFormatter";
 //Estilização
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import './billCard.css';
 
-
-function BillCard({ bill, onDelete, onEdit }) {
+function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
 
     return (
         <div className="container-bills-card">
             <div className="title-date-div">
                 <h2 className="bill-title">{bill.titulo}</h2>
-                <div className="wrapper-billData-billBanco">
-                    <p>{dateFormatter(bill.data)}</p>
+                <div className="container-paid-circle-data">
+                    <div className="wrapper-is-paid-circle-data">
+                        <div className="is-paid-circle" onClick={() => toggleIsPaid(bill.id)}>
+                            <div className={`circle ${bill.isPaid ? 'paid' : 'not-paid'}`}></div>
+                        </div>
+                        <div className="wrapper-billData-billBanco">
+                            <p>{dateFormatter(bill.data)}</p>
+                        </div>
+                    </div>
                     <div className={`bank-title ${bill.banco.toLowerCase().replace(" ", "-")}`}></div>
                 </div>
             </div>

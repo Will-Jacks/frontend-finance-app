@@ -12,13 +12,12 @@ function BuyerFilter() {
         <div className="wrapper-filter-buttons">
             <button onClick={() => client.publish(`${MQTT_TOPIC}-get`, 'parcial-bills')}>Recentes</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-get`, 'fetchUrl')}>Todos</button>
+            <button onClick={() => client.publish(`${MQTT_TOPIC}-get-paids`, '.')}>Pagos</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'livia')}>Lívia</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'william')}>William</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'miriam')}>Miriam</button>
-            <div className="splitter"></div>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-banco`, 'nubank')}>Nubank</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-banco`, 'santander')}>Santander</button>
-            <div className="splitter"></div>
 
             <button
                 onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador-banco`, '{"comprador": "livia","banco":"santander"}')} id="filter-button-santander-livia">Lib</button>
