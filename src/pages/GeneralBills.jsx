@@ -10,7 +10,8 @@ import BankCard from "../components/BankCard/BankCard";
 import Headers from "../components/Headers/Header";
 
 //Estilização
-import "./generalBills.css"
+import "./generalBills.css";
+import "./searcher.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
@@ -57,27 +58,27 @@ function GeneralBills() {
 
     function handleDate(e) {
         e.preventDefault();
-        client.publish(`${MQTT_TOPIC}/get/soma-total/periodo`, 'http://10.0.0.151:8080/get/soma-total/periodo')
+        client.publish(`${MQTT_TOPIC}-conta/get/somatotal/periodo`, `http://10.0.0.151:8080/conta/get/somatotal/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
     }
 
     return (
         <div className="general-bills-container">
             <Headers />
             <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse} /> Início</button>
-            <div>
-                <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
-            </div>
-            {Object.entries(message).map(([banco, compradores]) => (
-                <BankCard key={banco} banco={banco} compradores={compradores} />
-            ))}
-            <h1>teste</h1>
-            <form onSubmit={handleDate}>
+            <form onSubmit={handleDate} className="search-itens">
+                <h3>Pesquisar por período</h3>
                 <label htmlFor="">Data inicial</label>
                 <input type="date" name="" id="" onChange={e => setInitialDateFilter(e.target.value)} />
                 <label htmlFor="">Data final</label>
                 <input type="date" onChange={e => setEndDateFilter(e.target.value)} />
                 <button type="submit">Pesquisar</button>
             </form>
+            <div>
+                <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
+            </div>
+            {Object.entries(message).map(([banco, compradores]) => (
+                <BankCard key={banco} banco={banco} compradores={compradores} />
+            ))}
         </div>
     );
 }
