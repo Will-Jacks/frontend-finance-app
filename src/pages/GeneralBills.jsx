@@ -15,6 +15,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 function GeneralBills() {
+    const [initialDateFilter, setInitialDateFilter] = useState();
+    const [endDateFilter, setEndDateFilter] = useState();
+
     const [message, setMessage] = useState({});
     const navigate = useNavigate();
     const { client } = useMQTT();
@@ -52,16 +55,29 @@ function GeneralBills() {
         }, {});
     };
 
+    function handleDate(e) {
+        e.preventDefault();
+        client.publish(`${MQTT_TOPIC}/get/soma-total/periodo`, 'http://10.0.0.151:8080/get/soma-total/periodo')
+    }
+
     return (
         <div className="general-bills-container">
             <Headers />
-            <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse}/> Início</button>
+            <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse} /> Início</button>
             <div>
-                <h2 style={{textAlign: "justify"}}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
+                <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
             </div>
             {Object.entries(message).map(([banco, compradores]) => (
                 <BankCard key={banco} banco={banco} compradores={compradores} />
             ))}
+            <h1>teste</h1>
+            <form onSubmit={handleDate}>
+                <label htmlFor="">Data inicial</label>
+                <input type="date" name="" id="" onChange={e => setInitialDateFilter(e.target.value)} />
+                <label htmlFor="">Data final</label>
+                <input type="date" onChange={e => setEndDateFilter(e.target.value)} />
+                <button type="submit">Pesquisar</button>
+            </form>
         </div>
     );
 }
