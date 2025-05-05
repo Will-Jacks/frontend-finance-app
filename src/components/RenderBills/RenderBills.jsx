@@ -14,6 +14,7 @@ import BuyerFilter from "../Filters/BuyerFilter";
 //Util
 import BillCard from "../BillCard/BillCard";
 import { toast } from "react-toastify";
+import DateFilter from "../Filters/DateFilter";
 
 function RenderBills({ message, setMessage, setEditingBill }) {
     const { client } = useMQTT();
@@ -64,6 +65,9 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         <div className="wrapper-container-bills-card">
             <div className="container-filter-buttons">
                 <BuyerFilter />
+            </div>
+            <div>
+                <DateFilter endpoint={'home'} />
             </div>
             {loading ? (
                 <p className="text-loading">Carregando...</p>

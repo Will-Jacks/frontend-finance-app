@@ -14,10 +14,10 @@ import "./generalBills.css";
 import "./searcher.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import DateFilter from "../components/Filters/DateFilter";
 
 function GeneralBills() {
-    const [initialDateFilter, setInitialDateFilter] = useState();
-    const [endDateFilter, setEndDateFilter] = useState();
+
 
     const [message, setMessage] = useState({});
     const navigate = useNavigate();
@@ -56,23 +56,11 @@ function GeneralBills() {
         }, {});
     };
 
-    function handleDate(e) {
-        e.preventDefault();
-        client.publish(`${MQTT_TOPIC}-conta/get/somatotal/periodo`, `http://192.168.0.33:8080/conta/get/somatotal/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
-    }
-
     return (
         <div className="general-bills-container">
             <Headers />
             <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse} /> Início</button>
-            <form onSubmit={handleDate} className="search-itens">
-                <h3>Pesquisar por período</h3>
-                <label htmlFor="">Data inicial</label>
-                <input type="date" name="" id="" onChange={e => setInitialDateFilter(e.target.value)} />
-                <label htmlFor="">Data final</label>
-                <input type="date" onChange={e => setEndDateFilter(e.target.value)} />
-                <button type="submit">Pesquisar</button>
-            </form>
+            <DateFilter endpoint={'somatotal'} />
             <div>
                 <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
             </div>
