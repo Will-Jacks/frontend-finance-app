@@ -58,7 +58,7 @@ function GeneralBills() {
 
     function handleDate(e) {
         e.preventDefault();
-        client.publish(`${MQTT_TOPIC}-conta/get/somatotal/periodo`, `http://10.0.0.151:8080/conta/get/somatotal/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+        client.publish(`${MQTT_TOPIC}-conta/get/somatotal/periodo`, `http://192.168.0.33:8080/conta/get/somatotal/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
     }
 
     return (
