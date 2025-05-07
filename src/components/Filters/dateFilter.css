@@ -1,0 +1,65 @@
+.filter-button {
+    margin: 10px 0 10px 0;
+}
+
+.filter-button:hover {
+    color: rgba(255, 255, 255, 0.486);
+    cursor: pointer;
+}
+
+.search-itens.false {
+    display: none;
+}
+
+.search-itens.true {
+    display: flex;
+}
+
+.search-itens {
+    transition: 1s;
+}
+
+
+@media (max-width: 768px) {
+    .search-itens false {
+        display: none;
+    }
+
+    .search-itens {
+        display: flex;
+        flex-direction: column;
+        max-width: 80vw;
+    }
+
+    .search-itens>h3 {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .search-itens>input {
+        width: 80vw;
+        height: 30px;
+        font-size: 16px;
+        margin-bottom: 10px
+    }
+
+    .search-itens>button {
+        width: 40vw;
+        align-self: center;
+        justify-self: center;
+        margin: 10px 0 20px 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 1s;
+        border-color: transparent;
+        background-color: transparent;
+        font-size: 24px;
+        color: white;
+    }
+
+    .search-itens>button:hover {
+        transform: scale(1.1);
+    }
+}

@@ -11,7 +11,6 @@ import Headers from "../components/Headers/Header";
 
 //Estilização
 import "./generalBills.css";
-import "./searcher.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import DateFilter from "../components/Filters/DateFilter";
