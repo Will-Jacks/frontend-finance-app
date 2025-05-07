@@ -13,11 +13,11 @@ function DateFilter({ endpoint }) {
     function handleDate(e) {
         e.preventDefault();
         if (endpoint === "somatotal") {
-            client.publish(`${MQTT_TOPIC}-get-somatotal&home`, `http://192.168.0.33:8080/conta/get/somatotal/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+            client.publish(`${MQTT_TOPIC}-somatotal&home`, `http://192.168.0.33:8080/bill/totals-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
 
         }
         if (endpoint === "home") {
-            client.publish(`${MQTT_TOPIC}-get-somatotal&home`, `http://192.168.0.33:8080/conta/get/home/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+            client.publish(`${MQTT_TOPIC}-somatotal&home`, `http://192.168.0.33:8080/bill/bills-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
         }
     }
 

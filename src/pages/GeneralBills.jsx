@@ -26,18 +26,18 @@ function GeneralBills() {
         if (!client) return;
 
         function handleMessage(currentTopic, payload) {
-            if (currentTopic === `${MQTT_TOPIC}-generalBills`) {
+            if (currentTopic === `${MQTT_TOPIC}-summary-interface`) {
                 const groupedData = groupByBank(JSON.parse(payload.toString()));
                 setMessage(groupedData);
             }
         }
-        client.subscribe(`${MQTT_TOPIC}-generalBills`);
-        client.publish(`${MQTT_TOPIC}-generalBills-getData`, '.'); // Dispara o método GET no backend MQTT
+        client.subscribe(`${MQTT_TOPIC}-summary-interface`);
+        client.publish(`${MQTT_TOPIC}-summary`, '.'); // Dispara o método GET no backend MQTT
         client.on('message', handleMessage);
 
         return () => {
             client.off('message', handleMessage)
-            client.unsubscribe(`${MQTT_TOPIC}-generalBills`);
+            client.unsubscribe(`${MQTT_TOPIC}-summary-interface`);
             //Fecha a conexão com o tópico para deixar de consumir bandwidth
         }
     }, [client]);
