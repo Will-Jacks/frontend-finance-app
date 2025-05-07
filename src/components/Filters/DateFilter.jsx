@@ -20,16 +20,13 @@ function DateFilter({ endpoint }) {
             client.publish(`${MQTT_TOPIC}-get-somatotal&home`, `http://192.168.0.33:8080/conta/get/home/periodo?inicio=${initialDateFilter}&fim=${endDateFilter}`);
         }
     }
-    function toggleFilter() {
-        console.log('mudou');
-        setIsFilterActive(prev => !prev);
-    }
+
 
     return (
         <div>
-            <div className="filter-button" onClick={() => toggleFilter()} >
+            <button className="filter-button" onClick={() => setIsFilterActive(prev => !prev)} >
                 (+) Filtros
-            </div>
+            </button>
             <form onSubmit={handleDate} className={`search-itens ${isFilterActive}`}>
                 <h3>Pesquisar por período</h3>
                 <label htmlFor="">Data inicial</label>
