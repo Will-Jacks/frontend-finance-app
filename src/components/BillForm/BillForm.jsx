@@ -18,6 +18,7 @@ class Bill {
         this.categoria = categoria;
         this.data = data;
         this.hora = hora;
+
     }
 }
 
@@ -34,6 +35,7 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
     const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
     const [comprador, setComprador] = useState(editingBill?.comprador || "Lívia");
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
+    const [data, setData] = useState(editingBill?.data || "");
 
 
     function capitalizeFirstLetter(title) {
@@ -55,9 +57,11 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                 valor: valor.toFixed(2),
                 banco,
                 comprador,
-                categoria
+                categoria,
+                valor,
+                data
             };
-
+            console.log(updatedBill)
             client.publish(`${MQTT_TOPIC}-put`, JSON.stringify(updatedBill));
             const updatedList = message.map(b => b.id === updatedBill.id ? updatedBill : b);
             setMessage(updatedList);
@@ -71,7 +75,7 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                 banco,
                 comprador,
                 categoria,
-                currentDate.toLocaleDateString('pt-BR'),
+                data || currentDate.toLocaleDateString('sv-SE'),
                 currentDate.toLocaleTimeString('pt-BR')
             );
             const formattedMessage = JSON.stringify(newBill);
@@ -106,6 +110,9 @@ function BillForm({ message, setMessage, editingBill, setEditingBill }) {
                     ref={inputRef}
                     required
                 />
+
+                <label>Data</label>
+                <input type="date" onChange={(e) => setData(e.target.value)} />
 
                 <label>Banco</label>
                 <select

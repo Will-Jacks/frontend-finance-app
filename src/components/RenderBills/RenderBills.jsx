@@ -33,7 +33,6 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         client.publish(`${MQTT_TOPIC}-parcial-bills`, '.'); // Dispara o método GET no backend MQTT
         setLoading(true); // Exibir carregamento
         client.on('message', handleMessage);
-
         return () => {
             client.off('message', handleMessage)
             client.unsubscribe(MQTT_TOPIC);
