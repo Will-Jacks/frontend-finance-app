@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
     text-decoration: none;
     font-style: normal;
-    font-family: "Geist Mono", monospace;
+    font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -14,6 +16,7 @@ body {
     margin: 10px auto;
     width: 85vw;
     height: 90vh;
-    background-color: #181A1B; /* cor da aplicação geral */
+    background-color: #181A1B;
+    /* cor da aplicação geral */
     color: white;
 }
