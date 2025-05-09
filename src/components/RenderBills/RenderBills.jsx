@@ -63,7 +63,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
     return (
         <div className="wrapper-container-bills-card">
             <div className="container-filter-buttons">
-                <BuyerFilter />
+                <BuyerFilter message={message} setMessage={setMessage} />
             </div>
             <div>
                 <DateFilter endpoint={'home'} />

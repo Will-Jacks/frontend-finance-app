@@ -5,29 +5,46 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 //Estilização
 import "./buyerFilter.css";
 
-function BuyerFilter() {
+function BuyerFilter({ message, setMessage }) {
     const { client } = useMQTT();
     if (!client) return null;
+
+    function handleBuyerFilter(buyer) {
+        const filteredBills = message.filter(bill => bill.comprador === buyer);
+        setMessage(filteredBills);
+    }
+
+    function handleBankFilter(bank) {
+        const filteredBills = message.filter(bill => bill.banco === bank);
+        setMessage(filteredBills);
+    }
+
+    function handleBankAndBuyerFilter(bank, buyer) {
+        const filteredBills = message.filter(bill => bill.banco === bank && bill.comprador === buyer);
+        setMessage(filteredBills);
+    }
+
     return (
         <div className="wrapper-filter-buttons">
             <button onClick={() => client.publish(`${MQTT_TOPIC}-parcial-bills`, '.')}>Recentes</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-all`, '.')}>Todos</button>
             <button onClick={() => client.publish(`${MQTT_TOPIC}-paids`, '.')}>Pagos</button>
-            {/* <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'livia')}>Lívia</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'william')}>William</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador`, 'miriam')}>Miriam</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-banco`, 'nubank')}>Nubank</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-banco`, 'santander')}>Santander</button>
- */}
-            {/* <button
-                onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador-banco`, '{"comprador": "livia","banco":"santander"}')} id="filter-button-santander-livia">Lib</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador-banco`, '{"comprador": "william","banco":"santander"}')}
+            <div className="splitter"></div>
+            <button onClick={() => handleBuyerFilter('Lívia')}>Lívia</button>
+            <button onClick={() => handleBuyerFilter('William')}>William</button>
+            <button onClick={() => handleBuyerFilter('Miriam')}>Miriam</button>
+            <button onClick={() => handleBankFilter('Nubank')}>Nubank</button>
+            <button onClick={() => handleBankFilter('Santander')}>Santander</button>
+            <div className="splitter"></div>
+            <button
+                onClick={() => handleBankAndBuyerFilter('Santander', 'Lívia')} id="filter-button-santander-livia">Lib</button>
+            <button onClick={() => () => handleBankAndBuyerFilter('Santander', 'William')}
                 id="filter-button-santander-william">Will</button>
             <div className="splitter"></div>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador-banco`, '{"comprador": "livia","banco":"nubank"}')}
+            <button onClick={() => handleBankAndBuyerFilter('Nubank', 'Lívia')}
                 id="filter-button-nubank-livia">Lib</button>
-            <button onClick={() => client.publish(`${MQTT_TOPIC}-filtro-comprador-banco`, '{"comprador": "william","banco":"nubank"}')}
-                id="filter-button-nubank-william">Will</button> */}
+            <button onClick={() => handleBankAndBuyerFilter('Nubank', 'William')}
+                id="filter-button-nubank-william">Will</button>
         </div>
     )
 }
