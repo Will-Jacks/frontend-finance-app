@@ -32,7 +32,6 @@ function GeneralBills() {
             }
         }
         client.subscribe(`${MQTT_TOPIC}-summary-interface`);
-        client.publish(`${MQTT_TOPIC}-summary`, '.'); // Dispara o método GET no backend MQTT
         client.on('message', handleMessage);
 
         return () => {
