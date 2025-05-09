@@ -91,7 +91,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     function handleValueInput(e) {
         const eventValue = e.target.value;
         const valorDigitado = eventValue.replace(',', '.');
-        const regex = /^[0-9]+([.,][0-9]*)?$/;
+        const regex = /^[0-9]*([.,][0-9]*)?$/;
         if (regex.test(eventValue)) {
             setValor(valorDigitado);
         }
