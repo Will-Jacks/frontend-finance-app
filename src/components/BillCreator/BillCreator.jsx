@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 //Urls MQTT
 import useMQTT from "../../hooks/useMQTT";
@@ -25,7 +25,6 @@ class Bill {
 }
 
 function BillCreator({ message, setMessage, editingBill, setEditingBill, closeModal }) {
-    const inputRef = useRef(null); // Serve para selecionar o input ao receber foco
     const { client } = useMQTT();
 
     const sendMessage = (data) => {
@@ -33,7 +32,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     }
 
     const [titulo, setTitulo] = useState(editingBill?.titulo || "");
-    const [valor, setValor] = useState(editingBill?.valor || 0);
+    const [valor, setValor] = useState(editingBill?.valor || "");
     const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
     const [comprador, setComprador] = useState(editingBill?.comprador || "Lívia");
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
@@ -90,8 +89,13 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     }
 
     function handleValueInput(e) {
-        const valorDigitado = e.target.value.replace(',', '.');
-        setValor(valorDigitado);
+        const eventValue = e.target.value;
+        const valorDigitado = eventValue.replace(',', '.');
+        const regex = /^[0-9]+([.,][0-9]*)?$/;
+        if (regex.test(eventValue)) {
+            setValor(valorDigitado);
+        }
+        return;
     }
 
     return (
@@ -122,8 +126,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
                 placeholder="Digite aqui"
                 value={valor}
                 onChange={(e) => handleValueInput(e)}
-                onFocus={() => inputRef.current.select()}
-                ref={inputRef}
+                /*ref={inputRef} */
                 required
             />
 
