@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Modal from 'react-modal';
-import BillForm from "../BillForm/BillForm";
+import BillCreator from "../BillCreator/BillCreator";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
 
@@ -37,7 +37,6 @@ function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
 
     return (
         <>
-            {/* FAB flutuante */}
             <button
                 onClick={openModal}
                 className="fab-add-button"
@@ -45,7 +44,6 @@ function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
                 <FontAwesomeIcon icon={faPlus} />
             </button>
 
-            {/* Modal de criação */}
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
@@ -56,19 +54,14 @@ function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
                 closeTimeoutMS={300}
                 ariaHideApp={false}
             >
-                <button
-                    onClick={closeModal}
-                    className="close-modal-button"
-                >
-                    <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
 
                 <div className="wrapper-create-bill-form">
-                    <BillForm
+                    <BillCreator
                         message={message}
                         setMessage={setMessage}
                         editingBill={editingBill}
                         setEditingBill={setEditingBill}
+                        closeModal={closeModal}
                     />
                 </div>
             </Modal >
