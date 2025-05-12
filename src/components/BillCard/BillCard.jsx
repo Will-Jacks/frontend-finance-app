@@ -5,6 +5,7 @@ import dateFormatter from "../../utils/dateFormatter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './billCard.css';
+import MeatBallMenu from "../MeatballMenu/MeatBallMenu";
 
 function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
 
@@ -28,14 +29,15 @@ function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
             <p className="bill-value">{`R$ ${Number(bill.valor).toFixed(2)}`}</p>
             <div className="wrapper-billCategory-trashIcon">
                 <p className="bill-category">{bill.categoria}</p>
-                <div className="wrapper-trash-icon">
+                <MeatBallMenu />
+                {/* <div className="wrapper-trash-icon">
                     <button onClick={onEdit}>✏️</button>
                     <FontAwesomeIcon
                         icon={faTrash}
                         className="trash-icon"
                         onClick={() => onDelete(bill.id)}
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     )
