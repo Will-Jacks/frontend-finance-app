@@ -37,3 +37,9 @@
 .meatball-option.delete {
     color: #ff5c5c;
 }
+
+.meatball-option.paid-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

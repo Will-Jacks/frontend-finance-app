@@ -35,15 +35,6 @@ function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
 
                 </div>
                 <MeatBallMenu toggleIsPaid={toggleIsPaid} bill={bill} onEdit={onEdit} onDelete={onDelete} />
-
-                {/* <div className="wrapper-trash-icon">
-                    <button onClick={onEdit}>✏️</button>
-                    <FontAwesomeIcon
-                        icon={faTrash}
-                        className="trash-icon"
-                        onClick={() => onDelete(bill.id)}
-                    />
-                </div> */}
             </div>
         </div>
     )
