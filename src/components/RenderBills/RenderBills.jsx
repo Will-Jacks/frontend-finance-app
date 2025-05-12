@@ -47,6 +47,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             client.publish(`${MQTT_TOPIC}-delete`, String(id));
             const messageWithoutExcludedBill = message.filter(bill => bill.id !== id);
             setMessage(messageWithoutExcludedBill);
+            toast.success("Excluído com sucesso!");
         } else {
             return;
         }
