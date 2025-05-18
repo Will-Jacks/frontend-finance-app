@@ -90,6 +90,13 @@
     color: rgb(128, 0, 0);
 }
 
+.container-isPaidCircle-buyer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
 .buyer {
     margin-bottom: 5px;
     color: rgb(175, 175, 175);

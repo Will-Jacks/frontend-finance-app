@@ -2,12 +2,14 @@
 import dateFormatter from "../../utils/dateFormatter";
 
 //Estilização
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './billCard.css';
 import MeatBallMenu from "../MeatballMenu/MeatBallMenu";
 
 function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
+
+    function formatBankClassName(bankName) {
+        return bankName.toLowerCase().replace(' ', '-');
+    }
 
     return (
         <div className="container-bills-card">
@@ -19,10 +21,10 @@ function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
                             <p>{dateFormatter(bill.data)}</p>
                         </div>
                     </div>
-                    <div className={`bank-title ${bill.banco.toLowerCase().replace(" ", "-")}`}></div>
+                    <div className={`bank-title ${formatBankClassName(bill.banco)}`}></div>
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '5px' }}>
+            <div className="container-isPaidCircle-buyer">
                 <p className="buyer">{bill.comprador}</p>
                 <div className="is-paid-circle">
                     <div className={`circle ${bill.isPaid ? 'paid' : 'not-paid'}`}></div>
