@@ -5,14 +5,12 @@ import BottomComponent from "../components/BottomComponent/BottomComponent";
 import Headers from "../components/Headers/Header";
 import RenderBills from "../components/RenderBills/RenderBills";
 
-//Libs
-import { useNavigate } from 'react-router-dom';
-
 //Estilização
 import "./home.css";
+import Estatistics from "../components/Estatistics/Estatistics";
 
 function Home() {
-    const navigate = useNavigate();
+
     const [message, setMessage] = useState([]);
     const [editingBill, setEditingBill] = useState(null);
 
@@ -24,10 +22,7 @@ function Home() {
                 setMessage={setMessage}
                 setEditingBill={setEditingBill}
             />
-            {/* Floating Action Button */}
-            <button className="fab" onClick={() => navigate("/generalBills")}>
-                📊
-            </button>
+            <Estatistics />
             <BottomComponent
                 message={message}
                 setMessage={setMessage}
