@@ -23,8 +23,18 @@ function RenderBills({ message, setMessage, setEditingBill }) {
     useEffect(() => {
         if (!client) return;
 
+        const timeout = setTimeout(() => {
+            setLoading(false);
+            toast.error("Não foi possível se conectar ao servidor", {
+                closeOnClick: true,
+                autoClose: 2000
+            });
+            client.reconnect();
+        }, 5000);
+
         const handleMessage = (currentTopic, payload) => {
             if (currentTopic === MQTT_TOPIC) {
+                clearTimeout(timeout);
                 setMessage([...message, ...JSON.parse(payload.toString())]);
                 setLoading(false);
             }
