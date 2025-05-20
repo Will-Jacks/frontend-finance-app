@@ -10,27 +10,8 @@ import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-class Bill {
-    constructor(titulo, valor, banco, comprador, categoria, data, hora) {
-
-        this.titulo = titulo;
-        this.valor = valor;
-        this.banco = banco;
-        this.comprador = comprador;
-        this.categoria = categoria;
-        this.data = data;
-        this.hora = hora;
-
-    }
-}
-
 function BillCreator({ message, setMessage, editingBill, setEditingBill, closeModal }) {
     const { client } = useMQTT();
-
-    const sendMessage = (data) => {
-        client.publish(`${MQTT_TOPIC}-post`, data);
-    }
-
     const [titulo, setTitulo] = useState(editingBill?.titulo || "");
     const [valor, setValor] = useState(editingBill?.valor || "");
     const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
@@ -38,52 +19,68 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
     const [data, setData] = useState(editingBill?.data || "");
 
+    const BANCOS = ["Nubank", "Santander", "C6", "Will Bank", "Bradesco"];
+    const COMPRADORES = ["Lívia", "William", "Miriam"];
+    const CATEGORIAS = ["Alimentação", "Assinaturas", "Contas Fixas", "Cosméticos", "Gasolina", "Pets", "Roupas", "Outros"];
 
     function capitalizeFirstLetter(title) {
-        let capitalizedString = title[0].toUpperCase();
-        for (let i = 1; i < title.length; i++) {
-            capitalizedString += title[i];
-        }
-
+        const trimmed = title.trim();
+        if (!trimmed) return "";
+        const capitalizedString = trimmed[0].toUpperCase() + trimmed.slice(1);
         return capitalizedString;
+    }
+
+    function sendMessage(topicSufix, data) {
+        client.publish(`${MQTT_TOPIC}-${topicSufix}`, data);
+    }
+
+    function editBill() {
+        const updatedBill = {
+            ...editingBill,
+            titulo,
+            valor: Number(valor).toFixed(2),
+            banco,
+            comprador,
+            categoria,
+            data
+        };
+        sendMessage("put", JSON.stringify(updatedBill));
+        const updatedList = message.map(b => b.id === updatedBill.id ? updatedBill : b);
+        setMessage(updatedList);
+        toast.success('Conta atualizada com sucesso!', {
+            closeOnClick: true,
+            autoClose: 1000
+        });
+        setEditingBill(null);
+    }
+
+    function createBill() {
+        const currentDate = new Date();
+        const newBill = {
+            titulo: capitalizeFirstLetter(titulo),
+            valor: Number(valor).toFixed(2),
+            banco: banco,
+            comprador: comprador,
+            categoria: categoria,
+            data: data || currentDate.toLocaleDateString('sv-SE'),
+            hora: currentDate.toLocaleTimeString('pt-BR')
+        };
+        const formattedMessage = JSON.stringify(newBill);
+        sendMessage('post', formattedMessage);
+        setMessage([newBill, ...message]);
+        toast.success('Conta nova criada!', {
+            closeOnClick: true,
+            autoClose: 1000
+        });
     }
 
     function onSubmit(e) {
         e.preventDefault();
         if (editingBill) {
-            //Editando uma conta existente
-            const updatedBill = {
-                ...editingBill,
-                titulo,
-                valor: Number(valor).toFixed(2),
-                banco,
-                comprador,
-                categoria,
-                valor,
-                data
-            };
-            console.log(updatedBill)
-            client.publish(`${MQTT_TOPIC}-put`, JSON.stringify(updatedBill));
-            const updatedList = message.map(b => b.id === updatedBill.id ? updatedBill : b);
-            setMessage(updatedList);
-            toast.success('Conta atualizada com sucesso!');
-            setEditingBill(null);
-        } else {
-            const currentDate = new Date();
-            const newBill = new Bill(
-                capitalizeFirstLetter(titulo),
-                Number(valor).toFixed(2),
-                banco,
-                comprador,
-                categoria,
-                data || currentDate.toLocaleDateString('sv-SE'),
-                currentDate.toLocaleTimeString('pt-BR')
-            );
-            const formattedMessage = JSON.stringify(newBill);
-            sendMessage(formattedMessage);
-            setMessage([newBill, ...message]);
-            toast.success('Conta nova criada!');
+            editBill();
+            return;
         }
+        createBill();
         setTitulo("");
         setValor(0);
     }
@@ -95,17 +92,13 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         if (regex.test(eventValue)) {
             setValor(valorDigitado);
         }
-        return;
     }
 
     return (
         <form onSubmit={onSubmit} className="form-container-bill-creator">
             <div className="title-button-wrapper">
                 <label>Título</label>
-                <button
-                    onClick={closeModal}
-                    id="close-modal-button"
-                >
+                <button onClick={closeModal} id="close-modal-button" type="button">
                     <FontAwesomeIcon icon={faCircleXmark} />
                 </button>
             </div>
@@ -117,7 +110,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
                 autoFocus
                 required
             />
-
             <label>Valor</label>
             <input
                 type="text"
@@ -126,59 +118,46 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
                 placeholder="Digite aqui"
                 value={valor}
                 onChange={(e) => handleValueInput(e)}
-                /*ref={inputRef} */
                 required
             />
-
             <label>Data</label>
             <input
                 type="date"
+                value={data}
                 className="bill-creator-date-input"
                 onChange={(e) => setData(e.target.value)} />
-
             <label>Banco</label>
             <select
                 name=""
                 className="bill-creator-select"
                 value={banco}
                 onChange={(e) => { setBanco(e.target.value) }}>
-                <option value="Nubank">Nubank</option>
-                <option value="Santander">Santander</option>
-                <option value="C6">C6</option>
-                <option value="Will Bank">Will Bank</option>
-                <option value="Bradesco">Bradesco</option>
+                {BANCOS.map((banco) => (
+                    <option key={banco} value={banco}>{banco}</option>
+                ))}
             </select>
-
             <label htmlFor="">Comprador</label>
             <select
                 name=""
                 className="bill-creator-select"
                 value={comprador}
                 onChange={(e) => { setComprador(e.target.value) }}>
-                <option value="Lívia">Lívia</option>
-                <option value="William">William</option>
-                <option value="Miriam">Miriam</option>
+                {COMPRADORES.map(comprador => (
+                    <option value={comprador} key={comprador}>{comprador}</option>
+                ))}
             </select>
-
             <label htmlFor="">Categoria</label>
             <select
                 name=""
                 className="bill-creator-select"
                 value={categoria}
                 onChange={(e) => { setCategoria(e.target.value) }}>
-                <option value="Alimentação">Alimentação</option>
-                <option value="Assinaturas">Assinaturas</option>
-                <option value="Contas Fixas">Contas fixas</option>
-                <option value="Cosméticos">Cosméticos</option>
-                <option value="Gasolina">Gasolina</option>
-                <option value="Pets">Pets</option>
-                <option value="Roupas">Roupas</option>
-                <option value="Outros">Outros</option>
+                {CATEGORIAS.map(categoria => (
+                    <option value={categoria} key={categoria}>{categoria}</option>
+                ))}
             </select>
-
-            <button type="submit">Confirmar</button>
+            <button type="submit">{editingBill ? "Atualizar" : "Criar"}</button>
         </form>
     )
 }
-
 export default BillCreator;

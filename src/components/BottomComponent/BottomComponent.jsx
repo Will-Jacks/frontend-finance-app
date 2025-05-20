@@ -37,10 +37,7 @@ function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
 
     return (
         <>
-            <button
-                onClick={openModal}
-                className="fab-add-button"
-            >
+            <button onClick={openModal} className="fab-add-button">
                 <FontAwesomeIcon icon={faPlus} />
             </button>
 
