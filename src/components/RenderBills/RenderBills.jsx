@@ -17,31 +17,22 @@ import { toast } from "react-toastify";
 import DateFilter from "../Filters/DateFilter";
 
 function RenderBills({ message, setMessage, setEditingBill }) {
-    const { client } = useMQTT();
-    const [loading, setLoading] = useState(true);
+    const { client, loading, setLoading } = useMQTT();
 
     useEffect(() => {
         if (!client) return;
-
+        client.subscribe(MQTT_TOPIC);
         const timeout = setTimeout(() => {
+            if (!loading) return;
             setLoading(false);
-            toast.error("Não foi possível se conectar ao servidor", {
-                closeOnClick: true,
-                autoClose: 2000
-            });
-            client.reconnect();
         }, 5000);
-
         const handleMessage = (currentTopic, payload) => {
             if (currentTopic === MQTT_TOPIC) {
-                clearTimeout(timeout);
                 setMessage([...message, ...JSON.parse(payload.toString())]);
+                clearTimeout(timeout);
                 setLoading(false);
             }
         }
-        client.subscribe(MQTT_TOPIC);
-        client.publish(`${MQTT_TOPIC}-parcial-bills`, '.'); // Dispara o método GET no backend MQTT
-        setLoading(true); // Exibir carregamento
         client.on('message', handleMessage);
         return () => {
             client.off('message', handleMessage)
@@ -58,8 +49,6 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             const messageWithoutExcludedBill = message.filter(bill => bill.id !== id);
             setMessage(messageWithoutExcludedBill);
             toast.success("Excluído com sucesso!");
-        } else {
-            return;
         }
     }
 
@@ -82,11 +71,11 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             {loading ? (
                 <p className="text-loading">Carregando...</p>
             ) :
-                message.length === 0 ? (
+                message.length === 0 && (
                     <p className="text-nothing-to-show">
                         Nenhuma conta a ser exibida no momento. Tente novamente mais tarde
                     </p>
-                ) : null
+                )
             }
             <TransitionGroup>
                 {

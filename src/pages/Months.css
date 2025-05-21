@@ -1,0 +1,8 @@
+.months-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 1rem;
+    padding: 1rem;
+}
