@@ -1,0 +1,6 @@
+Implementar:
+[]Validação da conexão
+[]No GeneralBills,eu posso criar um componente que nem os dos filtros, mas que renderizam mês, para que quando clicar, dispare o que o componente Month faz, mas pra renderizar no GeneralBills
+
+Ajeitar:
+[]CSS do " (+) Filtros"

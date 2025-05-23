@@ -33,7 +33,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         return () => {
             clearTimeout(timeout)
         }
-    }, []);
+    }, [loading]);
 
     useEffect(() => {
         setBillRendered(message);
