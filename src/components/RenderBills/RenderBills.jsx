@@ -40,8 +40,6 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         }
     }, [client]);
 
-
-
     function onDelete(id) {
         const confirm = window.confirm("Deseja realmente excluir?");
         if (confirm) {
