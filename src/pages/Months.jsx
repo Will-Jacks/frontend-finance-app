@@ -4,8 +4,6 @@ import MonthCard from "../components/MonthCard/MonthCard";
 import useMQTT from "../hooks/useMQTT";
 import "./Months.css";
 import { MQTT_TOPIC } from "../context/MQTTContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 function Months() {
     const months = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
@@ -30,7 +28,6 @@ function Months() {
     return (
         <div>
             <Headers />
-            <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse} /> &nbsp;Início</button>
             <div className="months-container">
                 {
                     months.map((monthName, index) => (

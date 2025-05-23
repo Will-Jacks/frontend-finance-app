@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 //Urls MQTT
 import useMQTT from "../../hooks/useMQTT";
@@ -6,7 +6,6 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 
 //Estilização
 import "./billCreator.css";
-import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
