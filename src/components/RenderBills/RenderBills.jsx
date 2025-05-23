@@ -17,28 +17,25 @@ import { toast } from "react-toastify";
 import DateFilter from "../Filters/DateFilter";
 
 function RenderBills({ message, setMessage, setEditingBill }) {
-    const { client, loading, setLoading } = useMQTT();
+    const { client } = useMQTT();
+    const [loading, setLoading] = useState(true);
+    const [billRendered, setBillRendered] = useState([]);
 
     useEffect(() => {
-        if (!client) return;
-        client.subscribe(MQTT_TOPIC);
         const timeout = setTimeout(() => {
             if (!loading) return;
             setLoading(false);
         }, 5000);
-        const handleMessage = (currentTopic, payload) => {
-            if (currentTopic === MQTT_TOPIC) {
-                setMessage(JSON.parse(payload.toString()));
-                clearTimeout(timeout);
-                setLoading(false);
-            }
-        }
-        client.on('message', handleMessage);
         return () => {
-            client.off('message', handleMessage)
-            client.unsubscribe(MQTT_TOPIC);
+            clearTimeout(timeout)
         }
-    }, [client]);
+    }, []);
+
+    useEffect(() => {
+        setBillRendered(message);
+    }, [message]);
+
+    useEffect(() => { if (message.length > 0) setLoading(false) }, [message]);
 
     function onDelete(id) {
         const confirm = window.confirm("Deseja realmente excluir?");
@@ -61,7 +58,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
     return (
         <div className="wrapper-container-bills-card">
             <div className="container-filter-buttons">
-                <BuyerFilter message={message} setMessage={setMessage} />
+                <BuyerFilter message={message} setBillRendered={setBillRendered} />
             </div>
             <div>
                 <DateFilter endpoint={'home'} />
@@ -69,7 +66,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             {loading ? (
                 <p className="text-loading">Carregando...</p>
             ) :
-                message.length === 0 && (
+                billRendered.length === 0 && (
                     <p className="text-nothing-to-show">
                         Nenhuma conta a ser exibida no momento. Tente novamente mais tarde
                     </p>
@@ -77,7 +74,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             }
             <TransitionGroup>
                 {
-                    message.map((bill, index) => {
+                    billRendered.map((bill, index) => {
                         return (
                             <CSSTransition
                                 key={bill.id}

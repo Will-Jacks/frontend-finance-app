@@ -10,7 +10,12 @@ export const MQTTContext = createContext();
 export const MQTTProvider = ({ children }) => {
     const [client, setClient] = useState(null);
     const [message, setMessage] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const handleMessage = (currentTopic, payload) => {
+        if (currentTopic === MQTT_TOPIC) {
+            setMessage(JSON.parse(payload.toString()));
+        }
+    }
 
     useEffect(() => {
         const mqttClient = mqtt.connect(MQTT_URL);
@@ -23,7 +28,8 @@ export const MQTTProvider = ({ children }) => {
             console.error(e);
             mqttClient.end();
         });
-
+        mqttClient.subscribe(MQTT_TOPIC);
+        mqttClient.on('message', handleMessage);
         setClient(mqttClient);
 
         return () => {
@@ -34,7 +40,7 @@ export const MQTTProvider = ({ children }) => {
     }, []);
 
     return (
-        <MQTTContext.Provider value={{ client, message, setMessage, loading, setLoading }}>
+        <MQTTContext.Provider value={{ client, message, setMessage }}>
             {children}
         </MQTTContext.Provider>
     )

@@ -6,24 +6,25 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 import "./buyerFilter.css";
 import { useState } from "react";
 
-function BuyerFilter({ message, setMessage }) {
+function BuyerFilter({ message, setBillRendered }) {
     const { client } = useMQTT();
     const [isActive, setIsActive] = useState(false);
     if (!client) return null;
 
     function handleBuyerFilter(buyer) {
         const filteredBills = message.filter(bill => bill.comprador === buyer);
-        setMessage(filteredBills);
+        setBillRendered(filteredBills);
     }
 
     function handleBankFilter(bank) {
         const filteredBills = message.filter(bill => bill.banco === bank);
-        setMessage(filteredBills);
+        setBillRendered(filteredBills);
     }
 
     function handleBankAndBuyerFilter(bank, buyer) {
         const filteredBills = message.filter(bill => bill.banco === bank && bill.comprador === buyer);
-        setMessage(filteredBills);
+        console.log(filteredBills);
+        setBillRendered(filteredBills);
     }
 
     return (
@@ -39,7 +40,7 @@ function BuyerFilter({ message, setMessage }) {
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankFilter('Santander')}>Santander</button>
             <div className="splitter"></div>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Santander', 'Lívia')} id="filter-button-santander-livia" >Lib</button>
-            <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => () => handleBankAndBuyerFilter('Santander', 'William')} id="filter-button-santander-william">Will</button>
+            <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Santander', 'William')} id="filter-button-santander-william">Willa</button>
             <div className="splitter"></div>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Nubank', 'Lívia')} id="filter-button-nubank-livia">Lib</button>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Nubank', 'William')} id="filter-button-nubank-william">Will</button>

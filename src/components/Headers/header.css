@@ -1,13 +1,9 @@
 .header-container {
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.123);
     margin-bottom: 10px;
-
     display: flex;
     align-items: center;
-
-
 }
 
 .header-main-title {
@@ -15,5 +11,4 @@
     font-weight: 700;
     font-style: normal;
     font-size: 36px;
-
 }
