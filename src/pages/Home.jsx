@@ -23,7 +23,7 @@ function Home() {
                 setMessage={setMessage}
                 setEditingBill={setEditingBill}
             />
-            <Estatistics />
+            {/* <Estatistics /> */}
             <BottomComponent
                 message={message}
                 setMessage={setMessage}

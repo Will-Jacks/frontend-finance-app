@@ -1,0 +1,41 @@
+/* NavBar.css - Estilo dark minimalista tipo React Native */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #1a1a1a;
+    /* Dark background */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #333;
+    /* Subtle divider */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    /* Soft elevation */
+    z-index: 1000;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #888;
+    /* Neutral text */
+    font-size: 20px;
+    flex-grow: 1;
+    text-align: center;
+    padding: 6px 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-item.active {
+    color: #1f9725;
+    /* Cyan highlight */
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    color: #aaa;
+    /* Slight hover effect */
+}

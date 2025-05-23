@@ -10,7 +10,7 @@ import isTheFirstTime from "./utils/getUsername";
 //Estilização
 import { ToastContainer } from "react-toastify";
 import Months from './pages/Months';
-
+import NavBar from './components/NavBar/NavBar';
 function App() {
 
   useEffect(() => {
@@ -19,12 +19,15 @@ function App() {
   return (
     <MQTTProvider>
       <Router>
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/generalBills" element={<GeneralBills />} />
-          <Route path='/months' element={<Months />} />
-        </Routes>
+        <div style={{ paddingBottom: "60px" }}>
+          <ToastContainer />
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/generalBills" element={<GeneralBills />} />
+            <Route path='/months' element={<Months />} />
+          </Routes>
+        </div>
       </Router>
     </MQTTProvider>
   )

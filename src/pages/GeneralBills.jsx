@@ -57,8 +57,6 @@ function GeneralBills() {
     return (
         <div className="general-bills-container">
             <Headers />
-            <button className="back-button" onClick={() => navigate("/")}><FontAwesomeIcon icon={faHouse} /> &nbsp;Início</button>
-            <button className="back-button" onClick={() => navigate("/months")}> Meses</button>
             <DateFilter endpoint={'somatotal'} />
             <div>
                 <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
