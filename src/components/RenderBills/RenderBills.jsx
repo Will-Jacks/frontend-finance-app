@@ -28,7 +28,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         }, 5000);
         const handleMessage = (currentTopic, payload) => {
             if (currentTopic === MQTT_TOPIC) {
-                setMessage([...message, ...JSON.parse(payload.toString())]);
+                setMessage(JSON.parse(payload.toString()));
                 clearTimeout(timeout);
                 setLoading(false);
             }

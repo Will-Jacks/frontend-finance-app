@@ -1,7 +1,5 @@
 import mqtt from "mqtt";
 import { createContext, useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-
 //Urls mqtt
 const MQTT_URL = "wss://broker.emqx.io:8084/mqtt";
 //const MQTT_URL = "wss://test.mosquitto.org:8081/mqtt";
