@@ -40,7 +40,7 @@ function BuyerFilter({ message, setBillRendered }) {
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankFilter('Santander')}>Santander</button>
             <div className="splitter"></div>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Santander', 'Lívia')} id="filter-button-santander-livia" >Lib</button>
-            <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Santander', 'William')} id="filter-button-santander-william">Willa</button>
+            <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Santander', 'William')} id="filter-button-santander-william">Will</button>
             <div className="splitter"></div>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Nubank', 'Lívia')} id="filter-button-nubank-livia">Lib</button>
             <button className={`filter-button ${isActive ? 'active' : ''}`} onClick={() => handleBankAndBuyerFilter('Nubank', 'William')} id="filter-button-nubank-william">Will</button>
