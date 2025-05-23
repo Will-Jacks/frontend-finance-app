@@ -47,10 +47,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         sendMessage("put", JSON.stringify(updatedBill));
         const updatedList = message.map(b => b.id === updatedBill.id ? updatedBill : b);
         setMessage(updatedList);
-        toast.success('Conta atualizada com sucesso!', {
-            closeOnClick: true,
-            autoClose: 1000
-        });
         setEditingBill(null);
     }
 
@@ -68,10 +64,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         const formattedMessage = JSON.stringify(newBill);
         sendMessage('post', formattedMessage);
         setMessage([newBill, ...message]);
-        toast.success('Conta nova criada!', {
-            closeOnClick: true,
-            autoClose: 1000
-        });
     }
 
     function onSubmit(e) {

@@ -1,5 +1,6 @@
 import mqtt from "mqtt";
 import { createContext, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 //Urls mqtt
 const MQTT_URL = "wss://broker.emqx.io:8084/mqtt";
 //const MQTT_URL = "wss://test.mosquitto.org:8081/mqtt";
@@ -12,9 +13,38 @@ export const MQTTProvider = ({ children }) => {
     const [message, setMessage] = useState([]);
 
     const handleMessage = (currentTopic, payload) => {
+        const parsePayload = payload.toString();
         if (currentTopic === MQTT_TOPIC) {
-            setMessage(JSON.parse(payload.toString()));
+            setMessage(JSON.parse(parsePayload));
+            return;
         }
+        if (currentTopic === `${MQTT_TOPIC}-ping-pong`) {
+            confirmConectionWithServer(parsePayload);
+        }
+    }
+
+    function confirmConectionWithServer(payload) {
+        if (payload === "create") {
+            toast.success("Conta criada com sucesso!", {
+                closeOnClick: true,
+                autoClose: 1000
+            });
+            return;
+        }
+        if (payload === "edit") {
+            toast.success('Conta atualizada com sucesso!', {
+                closeOnClick: true,
+                autoClose: 1000
+            });
+            return;
+        }
+        if (payload === "delete") {
+            toast.success('Conta deletada com sucesso!', {
+                closeOnClick: true,
+                autoClose: 1000
+            });
+        }
+
     }
 
     useEffect(() => {
@@ -29,6 +59,7 @@ export const MQTTProvider = ({ children }) => {
             mqttClient.end();
         });
         mqttClient.subscribe(MQTT_TOPIC);
+        mqttClient.subscribe(`${MQTT_TOPIC}-ping-pong`);
         mqttClient.on('message', handleMessage);
         setClient(mqttClient);
 
