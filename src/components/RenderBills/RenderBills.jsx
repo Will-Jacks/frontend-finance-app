@@ -25,7 +25,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         const timeout = setTimeout(() => {
             if (!loading) return;
             setLoading(false);
-        }, 5000);
+        }, 2000);
         return () => {
             clearTimeout(timeout)
         }
@@ -68,7 +68,7 @@ function RenderBills({ message, setMessage, setEditingBill }) {
             ) :
                 billRendered.length === 0 && (
                     <p className="text-nothing-to-show">
-                        Nenhuma conta a ser exibida no momento. Tente novamente mais tarde
+                        Nenhuma conta econtrada
                     </p>
                 )
             }
