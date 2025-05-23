@@ -25,6 +25,10 @@ function RenderBills({ message, setMessage, setEditingBill }) {
         const timeout = setTimeout(() => {
             if (!loading) return;
             setLoading(false);
+            toast.error("Servidor fora do ar!", {
+                autoClose: 5000,
+                closeOnClick: true
+            });
         }, 2000);
         return () => {
             clearTimeout(timeout)
