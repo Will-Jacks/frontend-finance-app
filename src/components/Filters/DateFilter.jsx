@@ -3,7 +3,7 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 import useMQTT from "../../hooks/useMQTT";
 import "./dateFilter.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 function DateFilter({ endpoint }) {
     const today = new Date();
     const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -46,7 +46,8 @@ function DateFilter({ endpoint }) {
     return (
         <div>
             <button className="filter-button" onClick={() => setIsFilterActive(prev => !prev)} >
-                (+) Filtros
+                <FontAwesomeIcon icon={faFilter} style={{ marginRight: '8px' }} />
+                Filtrar
             </button>
             <form onSubmit={handleDate} className={`search-itens ${isFilterActive}`}>
                 <h3>Pesquisar por período</h3>

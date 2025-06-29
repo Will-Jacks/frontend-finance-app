@@ -1,13 +1,35 @@
 .filter-button {
-    margin: 10px 0 10px 0;
-    border: none;
     background-color: transparent;
-    color: white;
+    color: #A0A0A0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    margin: 10px 0;
 }
 
 .filter-button:hover {
-    color: rgba(255, 255, 255, 0.486);
-    cursor: pointer;
+    background-color: #2F2F2F;
+    /* Fundo sutil aparece no hover */
+    color: #D0D0D0;
+    /* Cor do hover que você tinha era rgba(255,255,255,0.486) - pode ajustar esta */
+}
+
+.filter-button:focus {
+    outline: 1px dotted #666;
+    /* Outline bem discreto para foco */
+    outline-offset: 2px;
+    color: #D0D0D0;
+}
+
+.filter-button:active {
+    color: #FFFFFF;
+    background-color: #252525;
 }
 
 .search-itens.false {

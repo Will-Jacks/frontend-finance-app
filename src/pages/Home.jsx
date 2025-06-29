@@ -7,7 +7,6 @@ import RenderBills from "../components/RenderBills/RenderBills";
 
 //Estilização
 import "./home.css";
-import Estatistics from "../components/Estatistics/Estatistics";
 import useMQTT from "../hooks/useMQTT";
 
 function Home() {
@@ -23,7 +22,6 @@ function Home() {
                 setMessage={setMessage}
                 setEditingBill={setEditingBill}
             />
-            {/* <Estatistics /> */}
             <BottomComponent
                 message={message}
                 setMessage={setMessage}
