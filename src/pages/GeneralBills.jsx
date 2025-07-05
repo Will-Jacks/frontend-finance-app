@@ -57,9 +57,17 @@ function GeneralBills() {
         let liviaTotals = 0;
         let williamTotals = 0;
         Object.entries(message).map(([banco, compradores]) => {
-            liviaTotals += compradores.Lívia;
-            williamTotals += compradores.William;
+            if (compradores.Lívia != null) {
+                liviaTotals += compradores.Lívia;
+            }
+
+            if (compradores.William != null) {
+                williamTotals += compradores.William;
+            }
+
         });
+        console.log(message);
+        console.log(liviaTotals)
         return [liviaTotals, williamTotals];
     }
 
