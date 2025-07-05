@@ -13,6 +13,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const { client } = useMQTT();
     const [titulo, setTitulo] = useState(editingBill?.titulo || "");
     const [valor, setValor] = useState(editingBill?.valor || "");
+    const [parcelas, setParcelas] = useState(editingBill?.parcelas || 0);
     const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
     const [comprador, setComprador] = useState(editingBill?.comprador || "Lívia");
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
@@ -21,6 +22,8 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const BANCOS = ["Nubank", "Santander", "C6", "Will Bank", "Bradesco"];
     const COMPRADORES = ["Lívia", "William", "Miriam"];
     const CATEGORIAS = ["Alimentação", "Assinaturas", "Contas Fixas", "Cosméticos", "Gasolina", "Pets", "Roupas", "Outros"];
+    const MAX_PARCELAS = 25; // Quero que conte a partir de 0
+    const parcelaOptions = Array.from({ length: MAX_PARCELAS }, (_, i) => i);
 
     function capitalizeFirstLetter(title) {
         const trimmed = title.trim();
@@ -38,6 +41,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
             ...editingBill,
             titulo,
             valor: Number(valor).toFixed(2),
+            parcelas,
             banco,
             comprador,
             categoria,
@@ -54,6 +58,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         const newBill = {
             titulo: capitalizeFirstLetter(titulo),
             valor: Number(valor).toFixed(2),
+            parcelas: parcelas,
             banco: banco,
             comprador: comprador,
             categoria: categoria,
@@ -61,6 +66,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
             hora: currentDate.toLocaleTimeString('pt-BR')
         };
         const formattedMessage = JSON.stringify(newBill);
+        console.log(formattedMessage);
         sendMessage('post', formattedMessage);
         setMessage([newBill, ...message]);
     }
@@ -74,6 +80,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         createBill();
         setTitulo("");
         setValor(0);
+        setParcelas(0);
     }
 
     function handleValueInput(e) {
@@ -111,6 +118,12 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
                 onChange={(e) => handleValueInput(e)}
                 required
             />
+            <label>Parcelas</label>
+            <select onChange={(e) => setParcelas(e.target.value)}>
+                {parcelaOptions.map((parcela) => (
+                    <option value={parcela}>{parcela}x</option>
+                ))}
+            </select>
             <label>Data</label>
             <input
                 type="date"
@@ -119,7 +132,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
                 onChange={(e) => setData(e.target.value)} />
             <label>Banco</label>
             <select
-                name=""
                 className="bill-creator-select"
                 value={banco}
                 onChange={(e) => { setBanco(e.target.value) }}>
@@ -129,7 +141,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
             </select>
             <label htmlFor="">Comprador</label>
             <select
-                name=""
                 className="bill-creator-select"
                 value={comprador}
                 onChange={(e) => { setComprador(e.target.value) }}>
@@ -139,7 +150,6 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
             </select>
             <label htmlFor="">Categoria</label>
             <select
-                name=""
                 className="bill-creator-select"
                 value={categoria}
                 onChange={(e) => { setCategoria(e.target.value) }}>
