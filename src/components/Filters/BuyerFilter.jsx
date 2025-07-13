@@ -68,14 +68,6 @@ function BuyerFilter({ message, setBillRendered }) {
             >William</button>
 
             <button
-                className={`filter-button ${activeButton === 'miriam' ? 'active' : ''}`}
-                onClick={() => handleClick('miriam', () => {
-                    const filtered = message.filter(bill => bill.comprador === 'Miriam');
-                    setBillRendered(filtered);
-                })}
-            >Miriam</button>
-
-            <button
                 className={`filter-button ${activeButton === 'nubank' ? 'active' : ''}`}
                 onClick={() => handleClick('nubank', () => {
                     const filtered = message.filter(bill => bill.banco === 'Nubank');

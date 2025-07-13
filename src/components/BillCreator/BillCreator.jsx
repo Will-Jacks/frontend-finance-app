@@ -19,8 +19,8 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
     const [data, setData] = useState(editingBill?.data || "");
 
-    const BANCOS = ["Nubank", "Santander", "C6", "Will Bank", "Bradesco"];
-    const COMPRADORES = ["Lívia", "William", "Miriam"];
+    const BANCOS = ["Nubank", "Santander", "C6", "Will Bank", "Bradesco", "Riachuelo"];
+    const COMPRADORES = ["Lívia", "William"];
     const CATEGORIAS = ["Alimentação", "Assinaturas", "Contas Fixas", "Cosméticos", "Gasolina", "Pets", "Roupas", "Outros"];
     const MAX_PARCELAS = 25; // Quero que conte a partir de 0
     const parcelaOptions = Array.from({ length: MAX_PARCELAS }, (_, i) => i);
