@@ -1,9 +1,12 @@
 import { useState } from "react";
 import "./userInfo.css";
 import { useEffect } from "react";
+import useMQTT from "../hooks/useMQTT";
+import { MQTT_TOPIC } from "../context/MQTTContext";
 function UsersInfo() {
-    const [liviaValue, setLiviaValue] = useState(localStorage.getItem("livia-gain-value") || "");
-    const [williamValue, setWilliamValue] = useState(localStorage.getItem("william-gain-value") || "");
+    const { client } = useMQTT();
+    const [liviaValue, setLiviaValue] = useState(localStorage.getItem("livia-gain-value") || "0");
+    const [williamValue, setWilliamValue] = useState(localStorage.getItem("william-gain-value") || "0");
     const [username, setUsername] = useState(localStorage.getItem("username") || "Fulano");
 
     const [totalRenda, setTotalRenda] = useState(0);
@@ -14,12 +17,12 @@ function UsersInfo() {
         const newValue = e.target.value;
         if (buyer === "William") {
             setWilliamValue(newValue);
-            //localStorage.setItem('william-gain-value', newValue);
+            localStorage.setItem('william-gain-value', newValue);
             return;
         }
         if (buyer === "Lívia") {
             setLiviaValue(newValue);
-            //localStorage.setItem('livia-gain-value', newValue);
+            localStorage.setItem('livia-gain-value', newValue);
             return;
         }
     }
@@ -34,6 +37,20 @@ function UsersInfo() {
             setUsername("");
         }
     }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const actualMonth = (new Date().getMonth() + 1);
+        const actualYear = (new Date().getFullYear());
+        const formattedData = {
+            mes: actualMonth,
+            ano: actualYear,
+            ganhosLivia: liviaValue,
+            ganhosWilliam: williamValue
+        }
+        client.publish(`${MQTT_TOPIC}-get-ganhos-trigger`, JSON.stringify(formattedData));
+    }
+
     useEffect(() => {
         // Converte os valores para número, tratando casos de campo vazio ou inválido (resultado será 0)
         const rendaLivia = parseFloat(liviaValue.replace(',', '.')) || 0;
@@ -52,19 +69,6 @@ function UsersInfo() {
         }
 
     }, [liviaValue, williamValue]);
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const actualMonth = (new Date().getMonth() + 1);
-        const actualYear = (new Date().getFullYear());
-        const formattedData = {
-            mes: actualMonth,
-            ano: actualYear,
-            ganhosLivia: liviaValue,
-            ganhosWilliam: williamValue
-        }
-        //  client.publish(`${MQTT_TOPIC}-get-ganhos-trigger`, JSON.stringify(formattedData));
-    }
 
     return (
         <div className="body">
@@ -110,12 +114,8 @@ function UsersInfo() {
                 </form>
             </div>
             <div className="summary-section">
-                <h3 className="summary-title">Renda</h3>
-                <p className="date-context">
-                    Referente a {new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}
-                </p>
+                <h3 className="summary-title">Renda referente à {new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}</h3>
                 <div className="total-income">
-                    <span>Renda Total</span>
                     <strong>
                         {totalRenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                     </strong>
