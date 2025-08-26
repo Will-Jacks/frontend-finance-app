@@ -11,6 +11,7 @@ import isTheFirstTime from "./utils/getUsername";
 import { ToastContainer } from "react-toastify";
 import Months from './pages/Months';
 import NavBar from './components/NavBar/NavBar';
+import UsersInfo from './pages/UsersInfo';
 function App() {
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/generalBills" element={<GeneralBills />} />
             <Route path='/months' element={<Months />} />
+            <Route path='/user' element={<UsersInfo />} />
           </Routes>
         </div>
       </Router>

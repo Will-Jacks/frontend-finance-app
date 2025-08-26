@@ -2,7 +2,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faHouse, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faHouse, faSquarePollVertical, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function NavBar() {
     const location = useLocation();
@@ -11,6 +11,7 @@ function NavBar() {
         { label: <FontAwesomeIcon icon={faHouse} />, path: '/' },
         { label: <FontAwesomeIcon icon={faSquarePollVertical} />, path: '/generalBills' },
         { label: <FontAwesomeIcon icon={faCalendar} />, path: '/months' },
+        { label: <FontAwesomeIcon icon={faUser} />, path: '/user' }
     ];
 
     return (
