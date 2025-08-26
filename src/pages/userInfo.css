@@ -96,3 +96,88 @@
 .submit-button:active {
     transform: translateY(0);
 }
+
+/* Adicione ao final do seu arquivo SeuEstilo.css */
+
+/* --- Seção de Resumo --- */
+.summary-section {
+    background-color: #25282a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.summary-title {
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.total-income {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.total-income strong {
+    color: #1F9725;
+    /* Usando sua cor de destaque */
+    font-size: 1.4em;
+}
+
+/* --- Barra de Contribuição --- */
+.contribution-bar {
+    display: flex;
+    height: 25px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #4f545c;
+    margin-bottom: 15px;
+}
+
+.bar-livia,
+.bar-william {
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+.bar-livia {
+    background-color: #3a7ca5;
+    /* Cor para Lívia */
+}
+
+.bar-william {
+    background-color: #d94e64;
+    /* Cor para William */
+}
+
+/* --- Legenda --- */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.livia-dot {
+    background-color: #3a7ca5;
+}
+
+.william-dot {
+    background-color: #d94e64;
+}
