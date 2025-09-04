@@ -73,7 +73,7 @@ function GeneralBills() {
             <DateFilter endpoint={'somatotal'} />
             <div className="app-container">
                 <h2 className="welcome-message">
-                    Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas
+                    {localStorage.getItem('username')}, aqui estão seu gastos deste mês
                 </h2>
                 <div>
                     {Object.entries(message).map(([banco, compradores]) => (
