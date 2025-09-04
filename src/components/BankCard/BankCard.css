@@ -1,5 +1,6 @@
 .bank-card {
-    background-color: #232526; /* Um cinza um pouco mais claro que o fundo */
+    background-color: #1E1E2A;
+    /* Um cinza um pouco mais claro que o fundo */
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 20px;
@@ -28,11 +29,13 @@
 
 /* Estilo por banco */
 .bank-card.nubank {
-    border-left-color: #8A05BE; /* Roxo Nubank */
+    border-left-color: #8A05BE;
+    /* Roxo Nubank */
 }
 
 .bank-card.santander {
-    border-left-color: #EC0000; /* Vermelho Santander */
+    border-left-color: #EC0000;
+    /* Vermelho Santander */
 }
 
 .bank-card.c6 {

@@ -20,7 +20,7 @@
     padding: 15px;
     max-height: 35px;
     background-color: #26353D;
-    color: white;
+    color: #A0A0B0;
     font-size: 14px;
     font-weight: bold;
 }
@@ -62,7 +62,6 @@
 
 .filter-button {
     background-color: #222;
-    color: #aaa;
     border: none;
     padding: 8px 12px;
     margin: 4px;

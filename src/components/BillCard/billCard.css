@@ -19,7 +19,7 @@
 .bill-title {
     display: flex;
     font-size: 20px;
-    color: white;
+    color: #F0F0F0;
     max-width: 70%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -75,7 +75,7 @@
     font-size: 12px;
     width: 50px;
     height: 5px;
-    background-color: white;
+    color: #A0A0B0;
     font-weight: bold;
 }
 
