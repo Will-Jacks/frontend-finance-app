@@ -6,17 +6,19 @@ function BankCard({ banco, compradores }) {
     const total = Object.values(compradores).reduce((acc, valor) => acc + valor, 0);
 
     return (
-        <div className={`bank-card ${bancoClass}`}>
-            <h2>{banco}</h2>
+        <div className={`account-card ${bancoClass}`}>
+            <h2 className="card-title">{banco}</h2>
             {Object.entries(compradores).map(([comprador, valor]) => (
-                <p key={comprador}>
-                    {comprador}: R$ {valor.toFixed(2)}
-                </p>
+                <div key={comprador} className="card-details">
+                    <span>{comprador}:</span>
+                    <span>R$ {valor.toFixed(2)}</span>
+                </div>
             ))}
-            <hr style={{ marginTop: '12px', borderColor: '#444' }} />
-            <p style={{ fontWeight: 'bold', marginTop: '8px', color: '#ddd' }}>
-                Total: R$ {total.toFixed(2)}
-            </p>
+            <div className="card-divider"></div>
+            <div className="card-total">
+                <span>Total:</span>
+                <span>R$ {total.toFixed(2)}</span>
+            </div>
         </div>
     );
 };

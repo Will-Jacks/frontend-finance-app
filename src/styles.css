@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Variáveis e Estilos Globais (Você já deve ter isso)
+   ========================================================================== */
+:root {
+    --background: #12121A;
+    --surface: #1E1E2A;
+    /* Cor dos cards */
+    --primary-text: #F0F0F0;
+    --secondary-text: #A0A0B0;
+    --accent-green: #00B37E;
+    --border-color: #2A2A3A;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+
+    --font-family: 'Inter', sans-serif;
+    --border-radius: 12px;
+    --padding-card: 24px;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--primary-text);
+    font-family: var(--font-family);
+}
+
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 20px 100px 20px;
+}
+
+
+.welcome-message {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--secondary-text);
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.account-card {
+    background-color: var(--surface);
+    border-radius: var(--border-radius);
+    padding: var(--padding-card);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-left: 5px solid var(--border-color);
+    border-left-color: #E6E6E6;
+}
+
+.account-card.nubank {
+    border-left-color: #8A05BE;
+    /* Roxo Nubank */
+}
+
+.account-card.santander {
+    border-left-color: #EC0000;
+    /* Vermelho Santander */
+}
+
+.account-card.c6 {
+    border-left-color: #E6E6E6;
+    /* Um cinza claro para o C6 */
+}
+
+.account-card.will {
+    border-left-color: #FFC700;
+    /* Amarelo Will Bank */
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.account-card .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--primary-text);
+}
+
+.account-card .card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.account-card .card-details span:first-child {
+    color: var(--secondary-text);
+}
+
+.account-card .card-details span:last-child {
+    font-weight: 500;
+}
+
+.account-card .card-divider {
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+.account-card .card-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.account-card .card-total span:last-child {
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+
+/* ==========================================================================
+   Estilos para RemainingValue.jsx
+   ========================================================================== */
+
+.remaining-balance {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: transparent;
+    /* Remove o fundo extra, pois já está no app */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.remaining-balance h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary-text);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    /* Deixa o título mais estilizado */
+    letter-spacing: 0.5px;
+}
+
+.remaining-balance .balance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Adiciona um espaçamento entre os itens, exceto no último */
+.remaining-balance .balance-item:not(:last-child) {
+    margin-bottom: 12px;
+}

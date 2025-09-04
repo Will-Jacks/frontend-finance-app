@@ -12,6 +12,7 @@ import Headers from "../components/Headers/Header";
 import "./generalBills.css";
 import DateFilter from "../components/Filters/DateFilter";
 import RemainingValue from "../components/RemainingValue/RemainingValue";
+import "../styles.css";
 
 function GeneralBills() {
     const [message, setMessage] = useState({});
@@ -67,18 +68,18 @@ function GeneralBills() {
 
 
     return (
-        <div className="general-bills-container">
+        <div>
             <Headers />
             <DateFilter endpoint={'somatotal'} />
-            <div>
-                <h2 style={{ textAlign: "justify" }}>Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas</h2>
-            </div>
-            <div>
-                {Object.entries(message).map(([banco, compradores]) => (
-                    <BankCard key={banco} banco={banco} compradores={compradores} />
-                ))}
-            </div>
-            <div>
+            <div className="app-container">
+                <h2 className="welcome-message">
+                    Olá, {localStorage.getItem('username')}! Veja um resumo das suas contas
+                </h2>
+                <div>
+                    {Object.entries(message).map(([banco, compradores]) => (
+                        <BankCard key={banco} banco={banco} compradores={compradores} />
+                    ))}
+                </div>
                 <RemainingValue buyersSum={sumBuyersValue()} />
             </div>
         </div>

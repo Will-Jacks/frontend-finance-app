@@ -15,26 +15,27 @@ function BillCard({ bill, onDelete, onEdit, toggleIsPaid }) {
         <div className="container-bills-card">
             <div className="title-date-div">
                 <h2 className="bill-title">{bill.titulo}</h2>
-                <div className="container-paid-circle-data">
-                    <div className="wrapper-is-paid-circle-data">
-                        <div className="wrapper-billData-billBanco">
-                            <p>{dateFormatter(bill.data)}</p>
-                        </div>
-                    </div>
-                    <div className={`bank-title ${formatBankClassName(bill.banco)}`}></div>
+                <div className="container-date">
+                    <p className="bill-date">{dateFormatter(bill.data)}</p>
                 </div>
             </div>
-            <div className="container-isPaidCircle-buyer">
-                <p className="buyer">{bill.comprador}</p>
+
+            <div className="card-body">
+                <div className="card-main-info">
+                    <p className="buyer">{bill.comprador}</p>
+                    <p className="bill-value">{`R$ ${Number(bill.valor).toFixed(2)}`}</p>
+                </div>
                 <div className="is-paid-circle">
                     <div className={`circle ${bill.isPaid ? 'paid' : 'not-paid'}`}></div>
                 </div>
             </div>
-            <p className="bill-value">{`R$ ${Number(bill.valor).toFixed(2)}`}</p>
-            <div className="wrapper-billCategory-trashIcon">
-                <div>
-                    <p className="bill-category">{bill.categoria}</p>
 
+            <div className="wrapper-billCategory-trashIcon">
+                <div className="card-tags">
+                    <p className="bill-category">{bill.categoria}</p>
+                    <span className={`bank-title ${formatBankClassName(bill.banco)}`}>
+                        {bill.banco}
+                    </span>
                 </div>
                 <MeatBallMenu toggleIsPaid={toggleIsPaid} bill={bill} onEdit={onEdit} onDelete={onDelete} />
             </div>

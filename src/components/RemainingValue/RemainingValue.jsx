@@ -11,11 +11,17 @@ function RemainingValue({ buyersSum }) {
         return Number(localStorageData - buyersSum[1].toFixed(2)) || 0;
     }
     return (
-        <div className="main-container">
+        <div className="remaining-balance">
             <h3>Valor restante:</h3>
-            <p>Lívia: R$ {formattingStringLivia()}</p>
-            <p>William: R$ {formattingStringWilliam()}</p>
-        </div> // Faz a subtração de acordo com o valor que está no localstorage, caso não exista, ele coloca zero;
+            <div className="balance-item">
+                <span>Lívia:</span>
+                <span>R$ {formattingStringLivia()}</span>
+            </div>
+            <div className="balance-item">
+                <span>William:</span>
+                <span>R$ {formattingStringWilliam()}</span>
+            </div>
+        </div>
     );
 }
 

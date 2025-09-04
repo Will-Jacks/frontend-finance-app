@@ -1,142 +1,131 @@
 .container-bills-card {
     box-sizing: border-box;
-    border-bottom: 1px solid rgb(44, 44, 44);
-    padding: 8px;
-    margin: 5px 0px 10px;
-
+    background-color: var(--surface);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px var(--shadow-color);
     display: flex;
     flex-direction: column;
+    gap: 12px;
 }
 
 .title-date-div {
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 3px;
+    align-items: center;
+    gap: 16px;
 }
 
 .bill-title {
-    display: flex;
-    font-size: 20px;
-    color: #F0F0F0;
-    max-width: 70%;
-    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-text);
+    white-space: nowrap;
     overflow: hidden;
-    align-self: flex-start;
+    text-overflow: ellipsis;
 }
 
-.container-paid-circle-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.wrapper-is-paid-circle-data {
+.container-date {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 12px;
 }
 
-.circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: currentColor;
-    transition: all 0.3s ease-in-out;
-}
-
-.paid {
-    background-color: #15ff00;
-}
-
-.not-paid {
-    background-color: #d50000;
-}
-
-.wrapper-billData-billBanco {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 5px;
+.bill-date {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--secondary-text);
+    white-space: nowrap;
 }
 
 .bank-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 10px;
-
-    margin-top: 4px;
-    font-size: 12px;
-    width: 50px;
-    height: 5px;
-    color: #A0A0B0;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
 }
 
 .bank-title.nubank {
-    background-color: purple;
-    color: white
+    background-color: #8A05BE;
+    color: white;
 }
 
 .bank-title.santander {
-    background-color: rgb(255, 0, 0);
-
-    color: rgb(128, 0, 0);
+    background-color: #EC0000;
+    color: white;
 }
 
-.container-isPaidCircle-buyer {
+.bank-title.c6 {
+    background-color: #E6E6E6;
+    color: #12121A;
+}
+
+.bank-title.will-bank {
+    background-color: #FFC700;
+    color: #12121A;
+}
+
+.card-body {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 5px;
+    align-items: flex-start;
+}
+
+.card-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .buyer {
-    margin-bottom: 5px;
-    color: rgb(175, 175, 175);
+    font-size: 14px;
+    color: var(--secondary-text);
 }
 
 .bill-value {
-    color: rgb(175, 175, 175);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-text);
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.paid {
+    background-color: var(--accent-green-paid);
+    box-shadow: 0 0 8px var(--accent-green-paid);
+}
+
+.not-paid {
+    background-color: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red);
 }
 
 .wrapper-billCategory-trashIcon {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+    margin-top: 4px;
 }
 
-
-.bill-category {
-    margin-top: 5px;
-    color: rgb(175, 175, 175);
-    font-size: 12px;
-}
-
-.wrapper-trash-icon {
+.card-tags {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 6px;
 }
 
-.wrapper-trash-icon>button:hover {
-    cursor: pointer;
-}
-
-.wrapper-trash-icon>button {
-    background-color: transparent;
-    padding: 5px;
-    border: none;
-}
-
-.trash-icon:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+.bill-category {
+    font-size: 12px;
+    color: var(--secondary-text);
+    background-color: var(--border-color);
+    padding: 4px 10px;
+    border-radius: 12px;
 }
