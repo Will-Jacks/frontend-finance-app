@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 //Urls mqtt
 const MQTT_URL = "wss://broker.emqx.io:8084/mqtt";
 //const MQTT_URL = "wss://test.mosquitto.org:8081/mqtt";
-export const MQTT_TOPIC = "finance-bills-app-localhost-broker";
+export const MQTT_TOPIC = "finance-bills-app";//-localhost-broker";
 
 export const MQTTContext = createContext();
 
