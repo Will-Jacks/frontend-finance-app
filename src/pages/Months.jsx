@@ -20,7 +20,7 @@ function Months() {
         setMessage([]);
         client.publish(
             `${MQTT_TOPIC}-somatotal&home`,
-            `http://192.168.0.33:8080/bill/bills-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`
+            `http://192.168.0.11:8080/bill/bills-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`
         );
         navigate('/');
     }

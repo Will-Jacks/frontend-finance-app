@@ -48,7 +48,7 @@ function UsersInfo() {
             ganhosLivia: liviaValue,
             ganhosWilliam: williamValue
         }
-        client.publish(`${MQTT_TOPIC}-get-ganhos-trigger`, JSON.stringify(formattedData));
+        client.publish(`${MQTT_TOPIC}-post-ganhos-trigger`, JSON.stringify(formattedData));
     }
 
     useEffect(() => {
