@@ -33,7 +33,6 @@ function GeneralBills() {
         return () => {
             client.off('message', handleMessage)
             client.unsubscribe(`${MQTT_TOPIC}-summary-interface`);
-            //Fecha a conexão com o tópico para deixar de consumir bandwidth
         }
     }, [client]);
 

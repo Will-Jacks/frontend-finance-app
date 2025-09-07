@@ -71,73 +71,78 @@ function UsersInfo() {
     }, [liviaValue, williamValue]);
 
     return (
-        <div className="body">
-            <div className="container">
-                <div className="name-section">
-                    <h2 className="section-title">Nome</h2>
-                    <input
-                        className="input-field"
-                        type="text"
-                        value={username}
-                        onChange={(e) => handleUsername(e)}
-                    />
-                </div>
-                <form className="income-form" onSubmit={handleSubmit}>
-                    <h2 className="section-title">Renda</h2>
-                    <div className="form-group">
-                        <p className="input-label">Lívia</p>
+        <div className="user-info-container">
+            <div className="user-info-card">
+                <div className="form-section">
+                    <h2 className="card-title">Informações e Renda</h2>
+                    <div className="name-group">
+                        <label className="input-label">Seu nome</label>
                         <input
                             className="input-field"
                             type="text"
-                            inputMode="decimal"
-                            pattern="[0-9]*[.,]?[0-9]*"
-                            placeholder="Digite aqui"
-                            value={liviaValue}
-                            onChange={(e) => handleValue("Lívia", e)}
-                            required
+                            value={username}
+                            onChange={handleUsername}
+                            placeholder="Digite seu nome"
                         />
                     </div>
-                    <div className="form-group">
-                        <p className="input-label">William</p>
-                        <input
-                            className="input-field"
-                            type="text"
-                            inputMode="decimal"
-                            pattern="[0-9]*[.,]?[0-9]*"
-                            placeholder="Digite aqui"
-                            value={williamValue}
-                            onChange={(e) => handleValue("William", e)}
-                            required
-                        />
-                    </div>
-                    <button className="submit-button" type="submit">Atualizar</button>
-                </form>
-            </div>
-            <div className="summary-section">
-                <h3 className="summary-title">Renda referente à {new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}</h3>
-                <div className="total-income">
-                    <strong>
-                        {totalRenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                    </strong>
+                    <form className="income-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label className="input-label">Renda de Lívia</label>
+                            <input
+                                className="input-field"
+                                type="text"
+                                inputMode="decimal"
+                                pattern="[0-9]*[.,]?[0-9]*"
+                                placeholder="R$ 0,00"
+                                value={liviaValue}
+                                onChange={(e) => handleValue("Lívia", e)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="input-label">Renda de William</label>
+                            <input
+                                className="input-field"
+                                type="text"
+                                inputMode="decimal"
+                                pattern="[0-9]*[.,]?[0-9]*"
+                                placeholder="R$ 0,00"
+                                value={williamValue}
+                                onChange={(e) => handleValue("William", e)}
+                                required
+                            />
+                        </div>
+                        <button className="submit-button" type="submit">Atualizar Renda</button>
+                    </form>
                 </div>
-                <div className="contribution-bar">
-                    <div
-                        className="bar-livia"
-                        style={{ width: `${percentLivia}%` }}
-                        title={`Lívia: ${percentLivia.toFixed(1)}%`}
-                    ></div>
-                    <div
-                        className="bar-william"
-                        style={{ width: `${percentWilliam}%` }}
-                        title={`William: ${percentWilliam.toFixed(1)}%`}
-                    ></div>
-                </div>
-                <div className="legend">
-                    <div className="legend-item">
-                        <span className="dot livia-dot"></span> Lívia
+
+                <div className="summary-section">
+                    <h3 className="summary-title">Resumo da Renda Mensal</h3>
+                    <div className="total-income">
+                        <span>Total</span>
+                        <strong>
+                            {totalRenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                        </strong>
                     </div>
-                    <div className="legend-item">
-                        <span className="dot william-dot"></span> William
+                    <div className="contribution-bar">
+                        <div
+                            className="bar-livia"
+                            style={{ width: `${percentLivia}%` }}
+                            title={`Lívia: ${percentLivia.toFixed(1)}%`}
+                        ></div>
+                        <div
+                            className="bar-william"
+                            style={{ width: `${percentWilliam}%` }}
+                            title={`William: ${percentWilliam.toFixed(1)}%`}
+                        ></div>
+                    </div>
+                    <div className="legend">
+                        <div className="legend-item">
+                            <span className="dot livia-dot"></span> Lívia
+                        </div>
+                        <div className="legend-item">
+                            <span className="dot william-dot"></span> William
+                        </div>
                     </div>
                 </div>
             </div>
