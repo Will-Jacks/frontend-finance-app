@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './bottomComponent.css';
+import useMQTT from "../../hooks/useMQTT";
 
-function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
+function BottomComponent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { message, setMessage, editingBill, setEditingBill } = useMQTT();
 
     function openModal() {
         setIsModalOpen(true);
@@ -17,7 +19,6 @@ function BottomComponent({ message, setMessage, editingBill, setEditingBill }) {
     function closeModal() {
         setIsModalOpen(false);
         setEditingBill(null);
-        window.location.reload();
     }
 
     useEffect(() => {

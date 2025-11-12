@@ -16,8 +16,8 @@ import BillCard from "../BillCard/BillCard";
 import { toast } from "react-toastify";
 import DateFilter from "../Filters/DateFilter";
 
-function RenderBills({ message, setMessage, setEditingBill }) {
-    const { client } = useMQTT();
+function RenderBills() {
+    const { client, message, setMessage, setEditingBill } = useMQTT();
     const [loading, setLoading] = useState(true);
     const [billRendered, setBillRendered] = useState([]);
 

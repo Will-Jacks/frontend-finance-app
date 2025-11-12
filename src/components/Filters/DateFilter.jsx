@@ -4,6 +4,7 @@ import useMQTT from "../../hooks/useMQTT";
 import "./dateFilter.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { API_BASE_URL } from "../../config/config";
 
 function DateFilter({ endpoint }) {
     const today = new Date();
@@ -26,17 +27,17 @@ function DateFilter({ endpoint }) {
     function handleDate(e) {
         e.preventDefault();
         if (endpoint === "somatotal") {
-            client.publish(`${MQTT_TOPIC}-somatotal&home`, `http://192.168.0.11:8080/bill/totals-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+            client.publish(`${MQTT_TOPIC}-somatotal&home`, `${API_BASE_URL}/bill/totals-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
 
         }
         if (endpoint === "home") {
-            client.publish(`${MQTT_TOPIC}-somatotal&home`, `http://192.168.0.11:8080/bill/bills-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+            client.publish(`${MQTT_TOPIC}-somatotal&home`, `${API_BASE_URL}/bill/bills-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
         }
     }
 
     useEffect(() => {
         if (client) {
-            client.publish(`${MQTT_TOPIC}-somatotal&home`, `http://192.168.0.11:8080/bill/totals-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
+            client.publish(`${MQTT_TOPIC}-somatotal&home`, `${API_BASE_URL}/bill/totals-by-period?inicio=${initialDateFilter}&fim=${endDateFilter}`);
         }
         //Vai atualizar o summary-interface com as bills do mês atual
         //[O que faz com que retorne o somatório é a URL totals-by-period]

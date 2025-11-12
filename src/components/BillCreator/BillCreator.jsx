@@ -9,6 +9,9 @@ import "./billCreator.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
+//config
+import { BANCOS, COMPRADORES, CATEGORIAS, parcelaOptions } from "../../config/config";
+
 function BillCreator({ message, setMessage, editingBill, setEditingBill, closeModal }) {
     const { client } = useMQTT();
     const [titulo, setTitulo] = useState(editingBill?.titulo || "");
@@ -19,10 +22,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
     const [data, setData] = useState(editingBill?.data || "");
 
-    const BANCOS = ["Nubank", "Santander", "C6", "Will Bank", "Bradesco", "Riachuelo"];
-    const COMPRADORES = ["Lívia", "William"];
-    const CATEGORIAS = ["Alimentação", "Assinaturas", "Contas Fixas", "Cosméticos", "Gasolina", "Pets", "Roupas", "Outros"];
-    const parcelaOptions = ["À vista", 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+
 
     function capitalizeFirstLetter(title) {
         const trimmed = title.trim();
@@ -66,8 +66,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
         };
         const formattedMessage = JSON.stringify(newBill);
         console.log(formattedMessage);
-        sendMessage('post', formattedMessage);
-        setMessage([newBill, ...message]);
+        sendMessage('post', formattedMessage);//-----------//
     }
 
     function onSubmit(e) {
