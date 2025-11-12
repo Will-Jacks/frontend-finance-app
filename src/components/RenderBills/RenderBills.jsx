@@ -19,7 +19,22 @@ import DateFilter from "../Filters/DateFilter";
 function RenderBills() {
     const { client, message, setMessage, setEditingBill } = useMQTT();
     const [loading, setLoading] = useState(true);
-    const [billRendered, setBillRendered] = useState([]);
+
+    const [activeFilter, setActiveFilter] = useState({ type: 'recentes', value: null });
+
+    const billRendered = message.filter(bill => {
+        if (activeFilter.type === 'buyer') {
+            return bill.comprador === activeFilter.value;
+        }
+        if (activeFilter.type === 'bank') {
+            return bill.banco === activeFilter.value;
+        }
+        if (activeFilter.type === 'bank-buyer') {
+            return bill.banco === activeFilter.bank && bill.comprador === activeFilter.buyer;
+        }
+
+        return true;
+    })
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -30,10 +45,6 @@ function RenderBills() {
             clearTimeout(timeout)
         }
     }, [loading]);
-
-    useEffect(() => {
-        setBillRendered(message);
-    }, [message]);
 
     useEffect(() => { if (message.length > 0) setLoading(false) }, [message]);
 
@@ -57,7 +68,10 @@ function RenderBills() {
     return (
         <div className="wrapper-container-bills-card">
             <div className="container-filter-buttons">
-                <BuyerFilter message={message} setBillRendered={setBillRendered} />
+                <BuyerFilter
+                    setActiveFilter={setActiveFilter}
+                    activeFilter={activeFilter}
+                />
             </div>
             <div>
                 <DateFilter endpoint={'home'} />

@@ -4,123 +4,88 @@ import { MQTT_TOPIC } from "../../context/MQTTContext";
 
 //Estilização
 import "./buyerFilter.css";
-import { useState } from "react";
 
-function BuyerFilter({ message, setBillRendered }) {
+function BuyerFilter({ activeFilter, setActiveFilter }) {
     const { client } = useMQTT();
-    const [activeButton, setActiveButton] = useState('recentes');
     if (!client) return null;
 
-    function handleBuyerFilter(buyer) {
-        const filteredBills = message.filter(bill => bill.comprador === buyer);
-        setBillRendered(filteredBills);
-    }
+    function handleClick(filterType, filterValue = null) {
+        if (['recentes', 'todos', 'pagos'].includes(filterType)) {
+            let topicSuffix = 'parcial-bills';
+            if (filterType === 'todos') topicSuffix = 'all';
+            if (filterType === 'pagos') topicSuffix = 'paids';
 
-    function handleBankFilter(bank) {
-        const filteredBills = message.filter(bill => bill.banco === bank);
-        setBillRendered(filteredBills);
-    }
+            client.publish(`${MQTT_TOPIC}-${topicSuffix}`, '.');
+        }
 
-    function handleBankAndBuyerFilter(bank, buyer) {
-        const filteredBills = message.filter(bill => bill.banco === bank && bill.comprador === buyer);
-        console.log(filteredBills);
-        setBillRendered(filteredBills);
-    }
-
-    function handleClick(id, action) {
-        setActiveButton(id);
-        action();
+        setActiveFilter({ type: filterType, value: filterValue });
     }
 
     return (
         <div className="wrapper-filter-buttons">
             <button
-                className={`filter-button ${activeButton === 'recentes' ? 'active' : ''}`}
-                onClick={() => handleClick('recentes', () => client.publish(`${MQTT_TOPIC}-parcial-bills`, '.'))}
+                className={`filter-button ${activeFilter.type === 'recentes' ? 'active' : ''}`}
+                onClick={() => handleClick('recentes')}
             >Recentes</button>
 
             <button
-                className={`filter-button ${activeButton === 'todos' ? 'active' : ''}`}
-                onClick={() => handleClick('todos', () => client.publish(`${MQTT_TOPIC}-all`, '.'))}
+                className={`filter-button ${activeFilter.type === 'todos' ? 'active' : ''}`}
+                onClick={() => handleClick('todos')}
             >Todos</button>
 
             <button
-                className={`filter-button ${activeButton === 'pagos' ? 'active' : ''}`}
-                onClick={() => handleClick('pagos', () => client.publish(`${MQTT_TOPIC}-paids`, '.'))}
+                className={`filter-button ${activeFilter.type === 'pagos' ? 'active' : ''}`}
+                onClick={() => handleClick('pagos')}
             >Pagos</button>
 
             <div className="splitter"></div>
 
             <button
-                className={`filter-button ${activeButton === 'livia' ? 'active' : ''}`}
-                onClick={() => handleClick('livia', () => {
-                    const filtered = message.filter(bill => bill.comprador === 'Lívia');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'buyer' && activeFilter.value === 'Lívia' ? 'active' : ''}`}
+                onClick={() => handleClick('buyer', 'Lívia')}
             >Lívia</button>
 
             <button
-                className={`filter-button ${activeButton === 'william' ? 'active' : ''}`}
-                onClick={() => handleClick('william', () => {
-                    const filtered = message.filter(bill => bill.comprador === 'William');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'buyer' && activeFilter.value === 'William' ? 'active' : ''}`}
+                onClick={() => handleClick('buyer', 'William')}
             >William</button>
 
             <button
-                className={`filter-button ${activeButton === 'nubank' ? 'active' : ''}`}
-                onClick={() => handleClick('nubank', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Nubank');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank' && activeFilter.value === 'Nubank' ? 'active' : ''}`}
+                onClick={() => handleClick('bank', 'Nubank')}
             >Nubank</button>
 
             <button
-                className={`filter-button ${activeButton === 'santander' ? 'active' : ''}`}
-                onClick={() => handleClick('santander', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Santander');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank' && activeFilter.value === 'Santander' ? 'active' : ''}`}
+                onClick={() => handleClick('bank', 'Santander')}
             >Santander</button>
 
             <div className="splitter"></div>
 
             <button
                 id="filter-button-santander-livia"
-                className={`filter-button ${activeButton === 'santander-livia' ? 'active' : ''}`}
-                onClick={() => handleClick('santander-livia', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Santander' && bill.comprador === 'Lívia');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Santander' && activeFilter.value?.buyer === 'Lívia' ? 'active' : ''}`}
+                onClick={() => handleClick('bank-buyer', { bank: 'Santander', buyer: 'Lívia' })}
             >Lib</button>
 
             <button
                 id="filter-button-santander-william"
-                className={`filter-button ${activeButton === 'santander-william' ? 'active' : ''}`}
-                onClick={() => handleClick('santander-william', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Santander' && bill.comprador === 'William');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Santander' && activeFilter.value?.buyer === 'William' ? 'active' : ''}`}
+                onClick={() => handleClick('bank-buyer', { bank: 'Santander', buyer: 'William' })}
             >Will</button>
 
             <div className="splitter"></div>
 
             <button
                 id="filter-button-nubank-livia"
-                className={`filter-button ${activeButton === 'nubank-livia' ? 'active' : ''}`}
-                onClick={() => handleClick('nubank-livia', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Nubank' && bill.comprador === 'Lívia');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Nubank' && activeFilter.value?.buyer === 'Lívia' ? 'active' : ''}`}
+                onClick={() => handleClick('bank-buyer', { bank: 'Nubank', buyer: 'Lívia' })}
             >Lib</button>
 
             <button
                 id="filter-button-nubank-william"
-                className={`filter-button ${activeButton === 'nubank-william' ? 'active' : ''}`}
-                onClick={() => handleClick('nubank-william', () => {
-                    const filtered = message.filter(bill => bill.banco === 'Nubank' && bill.comprador === 'William');
-                    setBillRendered(filtered);
-                })}
+                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Nubank' && activeFilter.value?.buyer === 'William' ? 'active' : ''}`}
+                onClick={() => handleClick('bank-buyer', { bank: 'Nubank', buyer: 'William' })}
             >Will</button>
         </div>
     )
