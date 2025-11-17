@@ -1,0 +1,64 @@
+.analytics-container {
+    margin-top: 2rem;
+    padding: 20px;
+    background-color: var(--surface, #1E1E2A);
+    border-radius: var(--border-radius, 12px);
+    border: 1px solid var(--border-color, #2A2A3A);
+}
+
+.analytics-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--primary-text, #F0F0F0);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.chart-wrapper {
+    width: 100%;
+    /* Definimos uma altura mínima, mas a altura do gráfico vai controlar */
+    min-height: 300px;
+    /* Adicionar um espaço entre os gráficos */
+    margin-bottom: 40px;
+}
+
+/* --- Estilos Específicos da Recharts --- */
+
+/* Texto dos Rótulos (Pizza) e Eixos (Barras) */
+.recharts-wrapper .recharts-text,
+.recharts-wrapper .recharts-cartesian-axis-tick-value {
+    fill: var(--primary-text, #F0F0F0) !important;
+    font-size: 12px;
+}
+
+/* Texto da Legenda */
+.recharts-legend-item-text {
+    color: var(--primary-text, #F0F0F0) !important;
+}
+
+/* Fundo do Tooltip (caixa flutuante) */
+.recharts-tooltip-wrapper {
+    /* A cor de fundo que você pediu */
+    background-color: #181A1B !important;
+
+    /* Vamos manter uma borda sutil com a cor do tema */
+    border: 1px solid var(--border-color, #2A2A3A) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    /* Sombra para destacar */
+}
+
+/* Cor do texto dentro do Tooltip */
+.recharts-tooltip-label,
+.recharts-tooltip-item {
+    /* A cor da fonte que você pediu */
+    color: #FFFFFF !important;
+    /* Branco */
+    font-weight: 500;
+}
+
+/* O nome do item no tooltip (ex: "Alimentação") */
+.recharts-tooltip-item-name {
+    color: #AAAAAA !important;
+    /* Um cinza claro para o nome */
+}

@@ -13,6 +13,7 @@ import "./generalBills.css";
 import DateFilter from "../components/Filters/DateFilter";
 import RemainingValue from "../components/RemainingValue/RemainingValue";
 import "../styles.css";
+import Analytics from "../components/Charts/Analytics";
 
 function GeneralBills() {
     const [message, setMessage] = useState({});
@@ -81,6 +82,7 @@ function GeneralBills() {
                 </div>
                 <RemainingValue buyersSum={sumBuyersValue()} />
             </div>
+            <Analytics />
         </div>
     );
 }
