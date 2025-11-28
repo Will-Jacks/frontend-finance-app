@@ -11,7 +11,6 @@ import Headers from "../components/Headers/Header";
 //Estilização
 import "./generalBills.css";
 import DateFilter from "../components/Filters/DateFilter";
-import RemainingValue from "../components/RemainingValue/RemainingValue";
 import "../styles.css";
 import Analytics from "../components/Charts/Analytics";
 import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
@@ -19,28 +18,46 @@ import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 function GeneralBills() {
     const [message, setMessage] = useState({});
     const { client } = useMQTT();
-    const income = localStorage.getItem('income') || 0;
+    const [income, setIncome] = useState(0);
     const outcome = sumBuyersValue().reduce((a, b) => a + b, 0);
     const remaining = income - outcome;
 
+
+    //Envia a mensagem para poder receber o income
+    useEffect(() => {
+        if (!client) return;
+        client.publish(`${MQTT_TOPIC}-get-month-income`, '.');//Publica para receber o income
+    }, [income]);
+
+    //Recebe mensagem do Summary Interface e Income
     useEffect(() => {
         if (!client) return;
 
         function handleMessage(currentTopic, payload) {
+            //Atualiza o BankCard e o outcome
             if (currentTopic === `${MQTT_TOPIC}-summary-interface`) {
                 const groupedData = groupByBank(JSON.parse(payload.toString()));
                 setMessage(groupedData);
             }
+            //Atualiza o income
+            if (currentTopic === `${MQTT_TOPIC}-income-data-response`) {
+                const incomeData = JSON.parse(payload.toString());
+                const total = incomeData.ganhosLivia + incomeData.ganhosWilliam;
+                setIncome(total);
+            }
         }
         client.subscribe(`${MQTT_TOPIC}-summary-interface`);
+        client.subscribe(`${MQTT_TOPIC}-income-data-response`);
         client.on('message', handleMessage);
 
         return () => {
             client.off('message', handleMessage)
             client.unsubscribe(`${MQTT_TOPIC}-summary-interface`);
+            client.unsubscribe(`${MQTT_TOPIC}-income`);
         }
     }, [client]);
 
+    //Organiza os dados por banco e comprador 
     function groupByBank(data) {
         return data.reduce((acc, { comprador, banco, valor }) => {
             if (!acc[banco]) {
@@ -54,6 +71,7 @@ function GeneralBills() {
         }, {});
     };
 
+    //Soma os valores de cada comprador em cada banco
     function sumBuyersValue() {
         let liviaTotals = 0;
         let williamTotals = 0;
@@ -100,7 +118,6 @@ function GeneralBills() {
                 ))}
             </div>
             <div className="app-container">
-                {/* <RemainingValue buyersSum={sumBuyersValue()} /> */}
             </div>
 
         </div>
