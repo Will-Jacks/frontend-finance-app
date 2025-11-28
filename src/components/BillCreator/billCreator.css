@@ -10,7 +10,7 @@
 
 .form-container-bill-creator label {
     font-weight: bold;
-    margin: 0 0 3px 2px
+    margin: 0 0 3px 2px;
 }
 
 .form-container-bill-creator input,
@@ -23,7 +23,12 @@
     background-color: #ffffff1f;
     font-size: 16px;
     color: white;
+}
 
+.form-container-bill-creator input[type="number"],
+.form-container-bill-creator input[type="date"] {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
 }
 
 .form-container-bill-creator select {
@@ -48,7 +53,6 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
-
 }
 
 .form-container-bill-creator button:hover {

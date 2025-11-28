@@ -19,11 +19,13 @@
 
 .bill-title {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--primary-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
 }
 
 .container-date {
@@ -37,6 +39,8 @@
     font-weight: 500;
     color: var(--secondary-text);
     white-space: nowrap;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
 }
 
 .bank-title {
@@ -87,6 +91,9 @@
     font-size: 22px;
     font-weight: 700;
     color: var(--primary-text);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
 }
 
 .circle {

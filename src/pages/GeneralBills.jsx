@@ -27,7 +27,7 @@ function GeneralBills() {
     useEffect(() => {
         if (!client) return;
         client.publish(`${MQTT_TOPIC}-get-month-income`, '.');//Publica para receber o income
-    }, [income]);
+    }, [client]);
 
     //Recebe mensagem do Summary Interface e Income
     useEffect(() => {

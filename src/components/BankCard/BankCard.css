@@ -19,12 +19,19 @@
     margin-bottom: 12px;
     color: #f0f0f0;
     font-weight: 600;
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
 }
 
 .bank-card p {
     margin: 4px 0;
     font-size: 1rem;
     color: #cccccc;
+}
+
+.bank-card p strong {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
 }
 
 /* Estilo por banco */
