@@ -49,7 +49,6 @@ function DateFilter({ endpoint }) {
         <div>
             <button className="filter-button" onClick={() => setIsFilterActive(prev => !prev)} >
                 <FontAwesomeIcon icon={faFilter} style={{ marginRight: '8px' }} />
-                Filtrar
             </button>
             <form onSubmit={handleDate} className={`search-itens ${isFilterActive}`}>
                 <h3>Pesquisar por período</h3>

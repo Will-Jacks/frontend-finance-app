@@ -1,6 +1,0 @@
-Implementar:
-[]Validação da conexão
-[]No GeneralBills adicionar botões com os meses para que possa filtrar no totals by period
-
-Ajeitar:
-[]CSS do " (+) Filtros"

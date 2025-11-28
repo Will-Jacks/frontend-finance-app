@@ -20,8 +20,8 @@ function App() {
           <ToastContainer />
           <NavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/generalBills" element={<GeneralBills />} />
+            <Route path="/" element={<GeneralBills />} />
+            <Route path="/generalBills" element={<Home />} />
             <Route path='/months' element={<Months />} />
             <Route path='/user' element={<UsersInfo />} />
           </Routes>

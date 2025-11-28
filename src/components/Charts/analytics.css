@@ -1,5 +1,5 @@
 .analytics-container {
-    margin-top: 2rem;
+    margin: 2rem 0;
     padding: 20px;
     background-color: var(--surface, #1E1E2A);
     border-radius: var(--border-radius, 12px);
