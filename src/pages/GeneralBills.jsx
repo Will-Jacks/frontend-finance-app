@@ -100,15 +100,15 @@ function GeneralBills() {
             <div className="stats-grid">
                 <div className="income stat-card">
                     <div className="stat-label"> <DollarSign size={20} /> Renda</div>
-                    <p className="stat-value">R$ {income}</p>
+                    <p className="stat-value">R$ {income.toFixed(2)}</p>
                 </div>
                 <div className="outcome stat-card">
                     <div className="stat-label"> <TrendingDown size={20} color="var(--danger)" /> Despesas</div>
-                    <p className="stat-value text-danger">R$ {outcome}</p>
+                    <p className="stat-value text-danger">R$ {outcome.toFixed(2)}</p>
                 </div>
                 <div className="remaining stat-card">
                     <div className="stat-label"> <TrendingUp size={20} color="var(--success)" /> Restante</div>
-                    <p className="stat-value text-success">R$ {remaining}</p>
+                    <p className="stat-value text-success">R$ {remaining.toFixed(2)}</p>
                 </div>
             </div>
             <Analytics />
