@@ -31,35 +31,6 @@
     color: hsla(130, 100%, 59%, 0.7);
 }
 
-#filter-button-santander-livia:hover,
-#filter-button-santander-william:hover,
-#filter-button-nubank-william:hover,
-#filter-button-nubank-livia:hover {
-    cursor: pointer;
-    background-color: hsla(130, 100%, 59%, 0.226);
-    color: hsla(130, 100%, 59%, 0.7);
-}
-
-#filter-button-santander-livia {
-    color: red;
-    background-color: rgba(105, 43, 43, 0.356);
-}
-
-#filter-button-santander-william {
-    color: red;
-    background-color: rgba(105, 43, 43, 0.356);
-}
-
-#filter-button-nubank-livia {
-    color: purple;
-    background-color: rgba(134, 36, 134, 0.219);
-}
-
-#filter-button-nubank-william {
-    color: purple;
-    background-color: rgba(134, 36, 134, 0.219);
-}
-
 .filter-button {
     background-color: #222;
     border: none;

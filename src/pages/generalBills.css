@@ -3,6 +3,7 @@
     --success: green;
     --danger: red;
     --text-main: white;
+    --text-secondary: #A0A0A0;
 }
 
 .flex {
@@ -35,6 +36,7 @@
     align-items: center;
     gap: 0.5rem;
 
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 

@@ -42,7 +42,7 @@ function GeneralBills() {
             //Atualiza o income
             if (currentTopic === `${MQTT_TOPIC}-income-data-response`) {
                 const incomeData = JSON.parse(payload.toString());
-                const total = incomeData.ganhosLivia + incomeData.ganhosWilliam;
+                const total = incomeData.renda;
                 setIncome(total);
             }
         }
@@ -76,8 +76,8 @@ function GeneralBills() {
         let liviaTotals = 0;
         let williamTotals = 0;
         Object.entries(message).map(([banco, compradores]) => {
-            if (compradores.Lívia != null) {
-                liviaTotals += compradores.Lívia;
+            if (compradores.Miriam != null) {
+                liviaTotals += compradores.Miriam;
             }
 
             if (compradores.William != null) {
@@ -111,7 +111,7 @@ function GeneralBills() {
                     <p className="stat-value text-success">R$ {remaining.toFixed(2)}</p>
                 </div>
             </div>
-            <Analytics />
+            {/*  <Analytics /> */}
             <div className="bank-cards-container">
                 {Object.entries(message).map(([banco, compradores]) => (
                     <BankCard key={banco} banco={banco} compradores={compradores} />

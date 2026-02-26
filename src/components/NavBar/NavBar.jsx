@@ -10,7 +10,7 @@ function NavBar() {
 
     const tabs = [
         { label: <LayoutDashboardIcon size={19} />, path: '/' },
-        { label: <FontAwesomeIcon icon={faSquarePollVertical} />, path: '/generalBills' },
+        { label: <FontAwesomeIcon icon={faSquarePollVertical} />, path: '/home' },
         { label: <FontAwesomeIcon icon={faCalendar} />, path: '/months' },
         { label: <FontAwesomeIcon icon={faUser} />, path: '/user' }
     ];

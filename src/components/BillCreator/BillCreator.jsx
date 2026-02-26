@@ -18,7 +18,7 @@ function BillCreator({ message, setMessage, editingBill, setEditingBill, closeMo
     const [valor, setValor] = useState(editingBill?.valor || "");
     const [parcelas, setParcelas] = useState(editingBill?.parcelas || 0);
     const [banco, setBanco] = useState(editingBill?.banco || "Nubank");
-    const [comprador, setComprador] = useState(editingBill?.comprador || "Lívia");
+    const [comprador, setComprador] = useState(editingBill?.comprador || "Miriam");
     const [categoria, setCategoria] = useState(editingBill?.categoria || "Alimentação");
     const [data, setData] = useState(editingBill?.data || "");
 

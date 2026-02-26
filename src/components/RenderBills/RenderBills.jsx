@@ -67,12 +67,12 @@ function RenderBills() {
 
     return (
         <div className="wrapper-container-bills-card">
-            <div className="container-filter-buttons">
+            {/* <div className="container-filter-buttons">
                 <BuyerFilter
                     setActiveFilter={setActiveFilter}
                     activeFilter={activeFilter}
                 />
-            </div>
+            </div> */}
             <div>
                 <DateFilter endpoint={'home'} />
             </div>

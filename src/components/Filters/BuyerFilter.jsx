@@ -41,16 +41,6 @@ function BuyerFilter({ activeFilter, setActiveFilter }) {
             <div className="splitter"></div>
 
             <button
-                className={`filter-button ${activeFilter.type === 'buyer' && activeFilter.value === 'Lívia' ? 'active' : ''}`}
-                onClick={() => handleClick('buyer', 'Lívia')}
-            >Lívia</button>
-
-            <button
-                className={`filter-button ${activeFilter.type === 'buyer' && activeFilter.value === 'William' ? 'active' : ''}`}
-                onClick={() => handleClick('buyer', 'William')}
-            >William</button>
-
-            <button
                 className={`filter-button ${activeFilter.type === 'bank' && activeFilter.value === 'Nubank' ? 'active' : ''}`}
                 onClick={() => handleClick('bank', 'Nubank')}
             >Nubank</button>
@@ -59,34 +49,6 @@ function BuyerFilter({ activeFilter, setActiveFilter }) {
                 className={`filter-button ${activeFilter.type === 'bank' && activeFilter.value === 'Santander' ? 'active' : ''}`}
                 onClick={() => handleClick('bank', 'Santander')}
             >Santander</button>
-
-            <div className="splitter"></div>
-
-            <button
-                id="filter-button-santander-livia"
-                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Santander' && activeFilter.value?.buyer === 'Lívia' ? 'active' : ''}`}
-                onClick={() => handleClick('bank-buyer', { bank: 'Santander', buyer: 'Lívia' })}
-            >Lib</button>
-
-            <button
-                id="filter-button-santander-william"
-                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Santander' && activeFilter.value?.buyer === 'William' ? 'active' : ''}`}
-                onClick={() => handleClick('bank-buyer', { bank: 'Santander', buyer: 'William' })}
-            >Will</button>
-
-            <div className="splitter"></div>
-
-            <button
-                id="filter-button-nubank-livia"
-                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Nubank' && activeFilter.value?.buyer === 'Lívia' ? 'active' : ''}`}
-                onClick={() => handleClick('bank-buyer', { bank: 'Nubank', buyer: 'Lívia' })}
-            >Lib</button>
-
-            <button
-                id="filter-button-nubank-william"
-                className={`filter-button ${activeFilter.type === 'bank-buyer' && activeFilter.value?.bank === 'Nubank' && activeFilter.value?.buyer === 'William' ? 'active' : ''}`}
-                onClick={() => handleClick('bank-buyer', { bank: 'Nubank', buyer: 'William' })}
-            >Will</button>
         </div>
     )
 }

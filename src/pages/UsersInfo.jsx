@@ -5,26 +5,14 @@ import useMQTT from "../hooks/useMQTT";
 import { MQTT_TOPIC } from "../context/MQTTContext";
 function UsersInfo() {
     const { client } = useMQTT();
-    const [liviaValue, setLiviaValue] = useState(localStorage.getItem("livia-gain-value") || "0");
-    const [williamValue, setWilliamValue] = useState(localStorage.getItem("william-gain-value") || "0");
     const [username, setUsername] = useState(localStorage.getItem("username") || "Fulano");
 
-    const [totalRenda, setTotalRenda] = useState(0);
-    const [percentLivia, setPercentLivia] = useState(50);
-    const [percentWilliam, setPercentWilliam] = useState(50);
+    const [income, setIncome] = useState(localStorage.getItem("income-value") || 0);
 
-    function handleValue(buyer, e) {
+    function handleValue(e) {
         const newValue = e.target.value;
-        if (buyer === "William") {
-            setWilliamValue(newValue);
-            localStorage.setItem('william-gain-value', newValue);
-            return;
-        }
-        if (buyer === "Lívia") {
-            setLiviaValue(newValue);
-            localStorage.setItem('livia-gain-value', newValue);
-            return;
-        }
+        setIncome(newValue);
+        localStorage.setItem('income-value', newValue);
     }
 
     function handleUsername(e) {
@@ -45,30 +33,10 @@ function UsersInfo() {
         const formattedData = {
             mes: actualMonth,
             ano: actualYear,
-            ganhosLivia: liviaValue,
-            ganhosWilliam: williamValue
+            renda: income
         }
         client.publish(`${MQTT_TOPIC}-post-ganhos-trigger`, JSON.stringify(formattedData));
     }
-
-    useEffect(() => {
-        // Converte os valores para número, tratando casos de campo vazio ou inválido (resultado será 0)
-        const rendaLivia = parseFloat(liviaValue.replace(',', '.')) || 0;
-        const rendaWilliam = parseFloat(williamValue.replace(',', '.')) || 0;
-
-        const total = rendaLivia + rendaWilliam;
-        setTotalRenda(total);
-
-        if (total > 0) {
-            setPercentLivia((rendaLivia / total) * 100);
-            setPercentWilliam((rendaWilliam / total) * 100);
-        } else {
-            // Se o total for 0, divide a barra igualmente
-            setPercentLivia(50);
-            setPercentWilliam(50);
-        }
-
-    }, [liviaValue, williamValue]);
 
     return (
         <div className="user-info-container">
@@ -87,64 +55,24 @@ function UsersInfo() {
                     </div>
                     <form className="income-form" onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label className="input-label">Renda de Lívia</label>
+                            <label className="input-label">Renda</label>
                             <input
                                 className="input-field"
                                 type="text"
                                 inputMode="decimal"
                                 pattern="[0-9]*[.,]?[0-9]*"
                                 placeholder="R$ 0,00"
-                                value={liviaValue}
-                                onChange={(e) => handleValue("Lívia", e)}
+                                value={income}
+                                onChange={(e) => handleValue(e)}
                                 required
                             />
-                        </div>
-                        <div className="form-group">
-                            <label className="input-label">Renda de William</label>
-                            <input
-                                className="input-field"
-                                type="text"
-                                inputMode="decimal"
-                                pattern="[0-9]*[.,]?[0-9]*"
-                                placeholder="R$ 0,00"
-                                value={williamValue}
-                                onChange={(e) => handleValue("William", e)}
-                                required
-                            />
+                            <h1>Renda: ${income}</h1>
                         </div>
                         <button className="submit-button" type="submit">Atualizar Renda</button>
                     </form>
                 </div>
 
-                <div className="summary-section">
-                    <h3 className="summary-title">Resumo da Renda Mensal</h3>
-                    <div className="total-income">
-                        <span>Total</span>
-                        <strong>
-                            {totalRenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                        </strong>
-                    </div>
-                    <div className="contribution-bar">
-                        <div
-                            className="bar-livia"
-                            style={{ width: `${percentLivia}%` }}
-                            title={`Lívia: ${percentLivia.toFixed(1)}%`}
-                        ></div>
-                        <div
-                            className="bar-william"
-                            style={{ width: `${percentWilliam}%` }}
-                            title={`William: ${percentWilliam.toFixed(1)}%`}
-                        ></div>
-                    </div>
-                    <div className="legend">
-                        <div className="legend-item">
-                            <span className="dot livia-dot"></span> Lívia
-                        </div>
-                        <div className="legend-item">
-                            <span className="dot william-dot"></span> William
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     );
